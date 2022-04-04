@@ -80,7 +80,7 @@ function setup() {
 }
 
 function draw() {
-	background(29)
+	background(28)
 
   //horizontal
 	if (width > height) {
