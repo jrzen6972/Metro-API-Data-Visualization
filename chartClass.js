@@ -13,6 +13,7 @@ class chartClass {
 		//Individual train info
 		this.data = data[index]
 
+        push()
 		//translate(this.Size/2,0)
 		
 		//Circles
@@ -52,5 +53,6 @@ class chartClass {
 		text(this.data.Destination, this.Xpos, this.Ypos + this.Size * 0.05) //Text
 		noStroke()
 		fill(0)
+        pop()
 	}
 }

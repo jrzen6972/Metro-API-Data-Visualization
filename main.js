@@ -76,14 +76,12 @@ function setup() {
 
 	}
 
-  print(20/width)
 }
 
 function draw() {
 	background(28)
 
-  //horizontal
-	if (width > height) {
+	if (width > height) {   //horizontal
 		push()
 		translate(width / 40 + width*0.065, height/2.75)
 		if (allTrains.length != 0) {
@@ -97,14 +95,15 @@ function draw() {
 
 	} else { //vertical
 
-		push()
-		translate(width/5, height/3-45)
 		if (allTrains.length != 0) {
+      push()
+      translate(width/5, height/3-45)
+
 			for (let i = 0; i < allTrains.length / 2; i++) {
 				pieArray[i].display(allTrains, i)
         translate((width / 4+width*0.04),0)
 			}
-			pop()
+		  pop()
 
 			if (allTrains.length >= 3) {
 				push()
@@ -120,13 +119,13 @@ function draw() {
 	}
 
 	timeElement()
-
 }
 
 
 function updateUrl() {
 	locCode = locationDict.get(sel.value())
 	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=dc0b3a0b8ee54077aa4e71f03e600aef'
+  //loadJSON(url, gotData, 'json') only works on local
 }
 
 function askWMATA() {
