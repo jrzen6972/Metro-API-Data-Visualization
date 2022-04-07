@@ -14,7 +14,7 @@ The Metro API Data Visualization project
 
 ![Drop-down menu](https://i.imgur.com/FKDDKpz.png)
 
-![Interactivity of interface](https://s7.gifyu.com/images/oie_fFmKw8vfK9n9.gif)
+![Interactivity of interface](https://i.imgur.com/Fy9WOkT.gif)
 
 *Note: there is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.*
 
