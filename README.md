@@ -1,6 +1,8 @@
 # Metro API Data Visualization
 
-*Tell me what you've gotten done so far, what obstacles you have encountered, and whether/how your plans have changed as you have gotten to work. The writing style can be informal. I want you to spend time on the project (not the writing), my goal is to make sure you've all gotten a good start instead of putting things off until the last minute, and to give you feedback if I see any signs of danger.*
+*Tell me what you've gotten done so far, what obstacles you have encountered, and whether/how your plans have changed as you have gotten to work. The writing style can be informal.*
+
+The Metro API Data Visualization project
 
 ## Readme format:
 
