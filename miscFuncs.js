@@ -6,7 +6,7 @@ function mouseClicked() {
 
 function updateUrl() {
 	locCode = locationDict.get(sel.value())
-	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=dc0b3a0b8ee54077aa4e71f03e600aef'
+	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
   //loadJSON(url, gotData, 'json') only works on local
 }
 
