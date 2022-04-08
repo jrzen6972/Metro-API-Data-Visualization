@@ -41,7 +41,7 @@ Mobile Compatability ‡
 
 The sole library we are using is p5.js. Being a heavily graphical library, p5.js offers a means to not only create different shapes, but html elements too. With the potential to post the sketch to the OpenProcessing site, mobile users will be able to use our app/visualization as well (ideal for commuters) https://openprocessing.org/sketch/1524522. P5.js has let us have a much easier time creating this visualization.
 
-4. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
+3. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
 
 This project has taken on a much different style since our brainstorming, but lends to a much better visualization. With the data the API provides, a static visualization would not be as useful. Creating a dynamic visualization that does not follow a traditional map, allows for more attention to be given to the data channels.
 
