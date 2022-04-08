@@ -12,19 +12,24 @@ The Metro API Data Visualization project is (*continue here*)
 1. **Images of Prototype** 
 
 Basic Interface
+
 ![Basic Interface](https://i.imgur.com/ROLmIH0.png)
 
 Drop-down menu
+
 ![Drop-down menu](https://i.imgur.com/FKDDKpz.png)
 
-Interactivity of interface
+Interactivity of interface †
+
 ![Interactivity of interface](https://i.imgur.com/Fy9WOkT.gif)
 
-Mobile Compatability
+Mobile Compatability ‡
 
 ![Mobile](https://i.imgur.com/CA98VTb.png)
 
-*Note: there is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.*
+† There is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.
+
+‡ Colors based on the WMATA Line color. 
 
 2.  **Modifications to proposed implementation approach**: *Any modifications to your proposed implementation approach. What libraries have you been using? Has your implementation approach changed significantly? If so, why?*\
 
