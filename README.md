@@ -1,9 +1,5 @@
 # Metro API Data Visualization
 
-**Before final submission, remove italicized instructions!**
-
-*Tell me what you've gotten done so far, what obstacles you have encountered, and whether/how your plans have changed as you have gotten to work. The writing style can be informal.*
-
 The Metro API Data Visualization project aims to deliver a new take on what a metro app can be. Designing this app as a potential option for commuters, riders should be able to know what the status of their train is at a moment's glance. Currently, an arc's length is the singular channel that depicts the train's predicted time from the station (in minutes). Once the arc completes into a full circle, there is an inner circle which further indicates the train is either Arriving (yellow) or Boarding (green). Being able to use p5.js and OpenProcessing for this project, a mobile interface is something we want to consider with each new addition to the visualization.
 
 Our visualization follow's WMATA design philosophy, referencing their [Brand and Style Guidelines.](https://www.wmata.com/business/procurement/solicitations/documents/Metro_Brand_and_Style_Guidelines.pdf) These guidelines outline the exact color values used in their color palette, and the exact fonts used in their corportate typeface. Both these colors and text fonts are used in our visualization to keep it consistent with other WMATA services. 
@@ -17,7 +13,6 @@ P5.js's hour() function displays the current hour from 0 to 24. As this is not t
 An issue that is popping up again is trains without a line color. For example, WMATA sometimes will run no passenger trains to test them on the circuits before letting passengers on. A condition is made for this, recognizing the "No" and filling it grey. This issue is reappearing in a similar fashion as there are now trains with "null" crashing the sketch. The resolution will be similar, but we don't know what a null train indicates if "No passenger" already exists.
 
 ### Readme format: 
-*Provide a status update in the readme.md of your project repo (or notebook) that is no more than 250-500 words and includes the following items. This update should be uploaded to your final project repo (do not submit anything to Canvas):*
 
 1. **Images of Prototype** 
 
@@ -37,11 +32,11 @@ Mobile Compatability ‡
 
 ![Mobile](https://i.imgur.com/CA98VTb.png)
 
-2.  **Modifications to proposed implementation approach**: *Any modifications to your proposed implementation approach. What libraries have you been using? Has your implementation approach changed significantly? If so, why?*
+2.  **Modifications to proposed implementation approach**:
 
 The sole library we are using is p5.js. Being a heavily graphical library, p5.js offers a means to not only create different shapes, but html elements too. With the potential to post the sketch to the [OpenProcessing site](https://openprocessing.org/sketch/1524522), mobile users will be able to use our app/visualization as well (ideal for commuters). P5.js has let us have a much easier time creating this visualization.
 
-3. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
+3. **Features and schedule**:
 
 This project has taken on a much different style since our brainstorming, but lends to a much better visualization. With the data the API provides, a static visualization would not be as useful. Creating a dynamic visualization that does not follow a traditional map, allows for more attention to be given to the data channels.
 
