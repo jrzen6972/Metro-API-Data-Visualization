@@ -27,10 +27,6 @@ Mobile Compatability ‡
 
 ![Mobile](https://i.imgur.com/CA98VTb.png)
 
-† There is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.
-
-‡ Colors based on the WMATA Line color. 
-
 2.  **Modifications to proposed implementation approach**: *Any modifications to your proposed implementation approach. What libraries have you been using? Has your implementation approach changed significantly? If so, why?*\
 
 4. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
@@ -42,3 +38,8 @@ Currently, we are wortking on:
 - Adding more interativity functions, such as showing rout destinations and outages, to name a few. 
 
 We aim to complete these items in time by the video demo on Friday, April 15. As of the writing of this readme, we have no issues with reaching the deadline. 
+
+
+† There is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.
+
+‡ Colors based on the WMATA Line color. 
