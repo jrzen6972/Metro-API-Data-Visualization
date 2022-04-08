@@ -1,7 +1,7 @@
+apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 
-url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=dc0b3a0b8ee54077aa4e71f03e600aef'
-stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=dc0b3a0b8ee54077aa4e71f03e600aef"
-
+url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
+stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
 //let allTrains
 let pieArray = []
@@ -70,10 +70,25 @@ function setup() {
 
 	setInterval(askWMATA, 1500)
 
-	for (let i = 0; i < allTrains.length; i++) {
-		//pieArray[i] = new chartClass(width / 12 * i, height / 2.5)
-    pieArray[i] = new chartClass(0, 0)
+	if (width > height) {
+		xOrigin = (width / 40 + width * 0.065)
+		xMulti = (width / 12 + width * 0.08)
+		y = height / 2.75
 
+		for (let i = 0; i < allTrains.length; i++) {
+			pieArray[i] = new chartClass(xOrigin + xMulti * i, y)
+		}
+
+	} else {
+		xOrigin = (width / 5)
+		xMulti = (width / 4 + width * 0.04)
+		y = height / 3 - 45
+		y2 = height / 1.83
+
+		for (let i = 0; i < allTrains.length / 2; i++) {
+			pieArray[i] = new chartClass(xOrigin + xMulti * i, y)
+			pieArray[i + 3] = new chartClass(xOrigin + xMulti * i, y2)
+		}
 	}
 
 }
@@ -81,57 +96,11 @@ function setup() {
 function draw() {
 	background(28)
 
-	if (width > height) {   //horizontal
-		push()
-		translate(width / 40 + width*0.065, height/2.75)
-		if (allTrains.length != 0) {
-			for (let i = 0; i < allTrains.length; i++) {
-				pieArray[i].display(allTrains, i)
-     		translate(width/12+width*.08,0)
-
-			}
-		}
-		pop()
-
-	} else { //vertical
-
-		if (allTrains.length != 0) {
-      push()
-      translate(width/5, height/3-45)
-
-			for (let i = 0; i < allTrains.length / 2; i++) {
-				pieArray[i].display(allTrains, i)
-        translate((width / 4+width*0.04),0)
-			}
-		  pop()
-
-			if (allTrains.length >= 3) {
-				push()
-				translate(width/5, height / 1.83)
-				
-				for (let i = 3; i < allTrains.length; i++) {
-					pieArray[i].display(allTrains, i)
-          translate((width / 4+width*0.04),0)
-				}
-				pop()
-			}
+	if (allTrains.length != 0) {
+		for (let i = 0; i < allTrains.length; i++) {
+			pieArray[i].display(allTrains, i)
 		}
 	}
 
 	timeElement()
-}
-
-
-function updateUrl() {
-	locCode = locationDict.get(sel.value())
-	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=dc0b3a0b8ee54077aa4e71f03e600aef'
-  //loadJSON(url, gotData, 'json') only works on local
-}
-
-function askWMATA() {
-	loadJSON(url, gotData, 'json')
-}
-
-function gotData(data) {
-	allTrains = data["Trains"]
 }
