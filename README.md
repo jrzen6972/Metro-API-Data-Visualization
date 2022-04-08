@@ -40,6 +40,6 @@ Currently, we are wortking on:
 We aim to complete these items in time by the video demo on Friday, April 15. As of the writing of this readme, we have no issues with reaching the deadline. 
 
 
-† There is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.
+† *There is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.*
 
-‡ Colors based on the WMATA Line color. 
+‡ *Colors based on the WMATA Line color.*
