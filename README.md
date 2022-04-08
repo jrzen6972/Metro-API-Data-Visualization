@@ -27,7 +27,7 @@ Mobile Compatability ‡
 
 ![Mobile](https://i.imgur.com/CA98VTb.png)
 
-2.  **Modifications to proposed implementation approach**: *Any modifications to your proposed implementation approach. What libraries have you been using? Has your implementation approach changed significantly? If so, why?*\
+2.  **Modifications to proposed implementation approach**: *Any modifications to your proposed implementation approach. What libraries have you been using? Has your implementation approach changed significantly? If so, why?*
 
 4. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
 
