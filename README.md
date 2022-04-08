@@ -31,7 +31,7 @@ Mobile Compatability ‡
 
 4. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
 
-Currently, we are wortking on:
+Currently, we are working on:
 
 - Seperating trains by group
 - Fitting in the true time somewhere within the visual
