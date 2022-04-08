@@ -21,6 +21,7 @@ Interactivity of interface
 ![Interactivity of interface](https://i.imgur.com/Fy9WOkT.gif)
 
 Mobile Compatability
+
 ![Mobile](https://i.imgur.com/CA98VTb.png)
 
 *Note: there is an issue with Microsoft Game Bar screen recording, where drop-down menus are made invisible in the final recording.*
