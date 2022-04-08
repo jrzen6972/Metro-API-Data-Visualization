@@ -6,7 +6,7 @@
 
 The Metro API Data Visualization project aims to deliver a new take on what a metro app can be. Designing this app as a potential option for commuters, riders should be able to know what the status of their train is at a moment's glance. Currently, an arc's length is the singular channel that depicts the train's predicted time from the station (in minutes). Once the arc completes into a full circle, there is an inner circle which further indicates the train is either Arriving (yellow) or Boarding (green). Being able to use p5.js and OpenProcessing for this project, a mobile interface is something we want to consider with each new addition to the visualization.
 
-Our visualization follow's WMATA design philosophy, referencing their Brand and Style Guidelines https://www.wmata.com/business/procurement/solicitations/documents/Metro_Brand_and_Style_Guidelines.pdf. These guidelines outline the exact color values used in their color palette, and the exact fonts used in their corportate typeface. Both these colors and text fonts are used in our visualization to keep it consistent with other WMATA services. 
+Our visualization follow's WMATA design philosophy, referencing their [Brand and Style Guidelines.](https://www.wmata.com/business/procurement/solicitations/documents/Metro_Brand_and_Style_Guidelines.pdf) These guidelines outline the exact color values used in their color palette, and the exact fonts used in their corportate typeface. Both these colors and text fonts are used in our visualization to keep it consistent with other WMATA services. 
 
 A functionality we are weary of implementing is the visualization immediately updating when the user selects a new station. When not abused, the feature works as intended. However, if someone was to navigate the selection box very fast, using the up and down arrow, an error related to loading the JSON file appears. When run from a local server (through vscode), this issue does not appear.
 
@@ -39,7 +39,7 @@ Mobile Compatability ‡
 
 2.  **Modifications to proposed implementation approach**: *Any modifications to your proposed implementation approach. What libraries have you been using? Has your implementation approach changed significantly? If so, why?*
 
-The sole library we are using is p5.js. Being a heavily graphical library, p5.js offers a means to not only create different shapes, but html elements too. With the potential to post the sketch to the OpenProcessing site, mobile users will be able to use our app/visualization as well (ideal for commuters) https://openprocessing.org/sketch/1524522. P5.js has let us have a much easier time creating this visualization.
+The sole library we are using is p5.js. Being a heavily graphical library, p5.js offers a means to not only create different shapes, but html elements too. With the potential to post the sketch to the [OpenProcessing site](https://openprocessing.org/sketch/1524522), mobile users will be able to use our app/visualization as well (ideal for commuters). P5.js has let us have a much easier time creating this visualization.
 
 3. **Features and schedule**: *How is your project tracking against what you proposed? Are you on schedule? If not, what's blocking you from making progress?*
 
