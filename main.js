@@ -4,7 +4,11 @@ stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=dc0b3a0b8ee5
 
 
 //let allTrains
-let pieArray = []
+let pieArray = [
+	['Shady Grove', 'Shady Grove', 'Shady Grove'],
+	['Glenmont', 'Glenmont', 'Glenmont'],
+];
+
 
 //colors identical to WMATA
 let lineColors = {
