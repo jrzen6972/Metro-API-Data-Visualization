@@ -1,25 +1,27 @@
 class chartClass {
-	constructor(Xpos, Ypos) {
-		this.Xpos = Xpos
-		this.Ypos = Ypos
-        if(width>height){
-		this.Size = width*.15 //200 //random(100,300)
-        }else{
-            this.Size = width*.25
-        }
+	constructor(X, Y) {
+		this.Xpos = X
+		this.Ypos = Y
+		this.hit = false
+		if (width > height) {
+			this.Size = width * 0.15 //200 //random(100,300)
+		} else {
+			this.Size = width * .25
+		}
+		this.Rad = this.Size / 2
 	}
 
 	display(data, index) {
 		//Individual train info
 		this.data = data[index]
 
-		//translate(this.Size/2,0)
-		
+		push()
+
 		//Circles
 		noStroke()
 		fill(0)
 		circle(this.Xpos, this.Ypos, this.Size)
-				
+
 		if (this.data.Min == 'ARR' || this.data.Min == 'BRD') {
 			fill(lineColors[this.data.Line])
 		} else {
@@ -34,14 +36,16 @@ class chartClass {
 		circle(this.Xpos, this.Ypos, this.Size * 0.875) //Black inner circle
 		if (this.data.Min == 'ARR') {
 			fill(248, 231, 28)
-			//fill(255, 163, 0) //secondary 1
 		} else if (this.data.Min == 'BRD') {
 			fill(43, 179, 37)
-			//fill(181, 189, 0) //secondary 1
-			//fill(103, 130, 58) //secondary 2
 		}
 
 		circle(this.Xpos, this.Ypos, this.Size * 0.75) //Conditionally colored inner circle
+		// if (this.hit == false) {
+		// 	fill(0)
+		// } else {
+		// 	fill(255)
+		// }
 		fill(0)
 		circle(this.Xpos, this.Ypos, this.Size * 0.70) //Black inner circle
 
@@ -52,5 +56,20 @@ class chartClass {
 		text(this.data.Destination, this.Xpos, this.Ypos + this.Size * 0.05) //Text
 		noStroke()
 		fill(0)
+		pop()
+	}
+
+	clickedOn(mX, mY) {
+		let dotRight = this.Xpos + this.Rad;
+		let dotLeft = this.Xpos - this.Rad;
+
+		let dotBot = this.Ypos + this.Rad;
+		let dotTop = this.Ypos - this.Rad;
+
+		if ((mX < dotRight) && (mX > dotLeft) && (mY > dotTop) && (mY < dotBot)) {
+			this.hit = true
+		} else {
+			this.hit = false
+		}
 	}
 }

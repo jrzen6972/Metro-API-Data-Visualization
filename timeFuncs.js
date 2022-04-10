@@ -13,13 +13,13 @@ function timeElement(){
 		currentTime[1] = "0" + minute()
 	}
 	//keep clock 12 hour
-	if (hour() == 12) {
-		currentTime[0] = hour()
+	if (hour() == 12 || hour() == 0) {
+		currentTime[0] = 12
 	}
 
 	//display time
 	text(currentTime[0] + ":" + currentTime[1], width / 2, 0)
-	translate(150, 0)
+	translate(width/4.75, 0)
 	textSize(30)
 	text(amPM(), width / 2, 0)
 }
