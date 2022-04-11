@@ -47,21 +47,21 @@ class chartClass {
 		fill(0)
 		circle(this.Xpos, this.Ypos, this.Size * 0.70) //Black inner circle
 
-	
+
 
 		noStroke()
 		strokeWeight(this.Size * 0.01)
 		fill(lineColors[this.data.Line])
 		textAlign(CENTER)
 		textSize(this.Size * 0.13) //Textsize and outline scale with size
-		text(this.data.Destination, this.Xpos, this.Ypos + this.Size * 0.05) //Text
+		text(this.data.Destination + "\n" + this.data.Min, this.Xpos, this.Ypos + this.Size * 0.05) //Text
 		noStroke()
 		fill(0)
 		pop()
 	}
 
 	clickedOn(mX, mY) {
-		if(dist(this.Xpos,this.Ypos,mX,mY)<this.Rad){
+		if (dist(this.Xpos, this.Ypos, mX, mY) < this.Rad) {
 			this.hit = true
 		} else {
 			this.hit = false
@@ -69,32 +69,41 @@ class chartClass {
 	}
 
 	stationsLeft(line, destination, currentStation) {
-		this.directedArr = lineStops[line].slice() //get the respective line's destinations
+		if (line != 'No') {
+			this.directedArr = lineStops[line].slice() //get the respective line's destinations
 
-		if (this.directedArr.indexOf(destination) < this.directedArr.indexOf(currentStation)) {
-			this.newArr = this.directedArr.slice(this.directedArr.indexOf(destination), this.directedArr.indexOf(currentStation) + 1)
-			this.newArr.reverse()
-		} else {
-			this.newArr = this.directedArr.slice(this.directedArr.indexOf(currentStation), this.directedArr.indexOf(destination) + 1)
+			if (this.directedArr.indexOf(destination) < this.directedArr.indexOf(currentStation)) {
+				this.newArr = this.directedArr.slice(this.directedArr.indexOf(destination), this.directedArr.indexOf(currentStation) + 1)
+				this.newArr.reverse()
+			} else {
+				this.newArr = this.directedArr.slice(this.directedArr.indexOf(currentStation), this.directedArr.indexOf(destination) + 1)
+			}
+
+			this.stacked = this.newArr.join('\n')
+			return this.stacked
 		}
-
-		this.stacked = this.newArr.join('\n')
-		return this.stacked
 	}
 
-	textPopUp(){
-		if(this.hit){
+	textPopUp() {
+		if (this.hit) {
 			sel.hide()
 
-			fill(28)
-			rect(0,0,width,height)
+			fill(28, 170)
+			rect(0, 0, width, height)
 			textAlign(LEFT)
-			if(width<height){textSize(height/35)}
-			else{textSize(height/35)}
+			if (width < height) {
+				textSize(height / 35)
+			} else {
+				textSize(height / 35)
+			}
 			fill(255)
-			text(this.stationsLeft(this.data.Line,this.data.DestinationName,this.data.LocationName),
-			width/2-this.Size,height/19)
-			
+			if (this.data.Line != "No"){
+				text("Remaining Stops: \n" + this.stationsLeft(this.data.Line, this.data.DestinationName, this.data.LocationName),
+					width / 2 - this.Size, height / 19)
+			}else{
+				text("No passenger train" + "\n No data",width / 2 - this.Size, height / 19)
+			}
+			// boxPopped = true
 		}
 	}
 }
