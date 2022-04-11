@@ -1,6 +1,8 @@
 function mouseClicked() {
+	sel.show()
+
 	for (j = 0; j < pieArray.length; j++) {
-		pieArray[j].clickedOn(mouseX, mouseY);
+		pieArray[j].clickedOn(mouseX, mouseY);		
 	}
 }
 
