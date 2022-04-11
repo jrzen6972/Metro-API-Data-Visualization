@@ -3,25 +3,6 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
-//let allTrains
-let pieArray = [
-	['Shady Grove', 'Shady Grove', 'Shady Grove'],
-	['Glenmont', 'Glenmont', 'Glenmont'],
-];
-
-
-//colors identical to WMATA
-let lineColors = {
-	'RD': [191, 13, 62],
-	'BL': [0, 156, 222],
-	'OR': [237, 139, 0],
-	'SV': [145, 157, 157],
-	'GR': [0, 177, 64],
-	'YL': [255, 209, 0],
-	'No': "gray"
-}
-
-//let locationDict = {}
 
 function preload() {
 	stationData = loadJSON(stationUrl)
