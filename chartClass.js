@@ -47,14 +47,7 @@ class chartClass {
 		fill(0)
 		circle(this.Xpos, this.Ypos, this.Size * 0.70) //Black inner circle
 
-		if (this.hit == true) {
-			fill(75)
-			textAlign(LEFT)
-			textSize(9)
-			fill(255)
-			text(this.stationsLeft(this.data.Line,this.data.DestinationName,this.data.LocationName),
-			this.Xpos-this.Size/4,this.Ypos+this.Size/5)
-		}
+	
 
 		noStroke()
 		strokeWeight(this.Size * 0.01)
@@ -68,13 +61,7 @@ class chartClass {
 	}
 
 	clickedOn(mX, mY) {
-		let dotRight = this.Xpos + this.Rad;
-		let dotLeft = this.Xpos - this.Rad;
-
-		let dotBot = this.Ypos + this.Rad;
-		let dotTop = this.Ypos - this.Rad;
-
-		if ((mX < dotRight) && (mX > dotLeft) && (mY > dotTop) && (mY < dotBot)) {
+		if(dist(this.Xpos,this.Ypos,mX,mY)<this.Rad){
 			this.hit = true
 		} else {
 			this.hit = false
@@ -93,5 +80,21 @@ class chartClass {
 
 		this.stacked = this.newArr.join('\n')
 		return this.stacked
+	}
+
+	textPopUp(){
+		if(this.hit){
+			sel.hide()
+
+			fill(28)
+			rect(0,0,width,height)
+			textAlign(LEFT)
+			if(width<height){textSize(height/35)}
+			else{textSize(height/35)}
+			fill(255)
+			text(this.stationsLeft(this.data.Line,this.data.DestinationName,this.data.LocationName),
+			width/2-this.Size,height/19)
+			
+		}
 	}
 }
