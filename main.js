@@ -22,7 +22,6 @@ function setup() {
 
 	stations = stationData["Stations"]
 
-	//print(stations)
 	sel = createSelect();
 	sel.style("background", "gray")
 	sel.style("font-family", "Arial")
@@ -81,11 +80,15 @@ function setup() {
 function draw() {
 	background(28)
 
+	timeElement()
+
 	if (allTrains.length != 0) {
 		for (let i = 0; i < allTrains.length; i++) {
 			pieArray[i].display(allTrains, i)
 		}
+	
+		for(let i = 0; i<allTrains.length;i++){
+			pieArray[i].textPopUp()
+		}
 	}
-
-	timeElement()
 }
