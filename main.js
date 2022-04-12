@@ -10,7 +10,6 @@ let pieArray = [
 	['Glenmont', 'Glenmont', 'Glenmont'],
 ];
 
-
 //colors identical to WMATA
 let lineColors = {
 	'RD': [191, 13, 62],
