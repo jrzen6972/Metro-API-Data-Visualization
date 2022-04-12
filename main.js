@@ -3,10 +3,7 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
-let pieArray = [
-	['Shady Grove', 'Shady Grove', 'Shady Grove'],
-	['Glenmont', 'Glenmont', 'Glenmont'],
-];
+let pieArray = [];
 
 //colors identical to WMATA
 let lineColors = {
