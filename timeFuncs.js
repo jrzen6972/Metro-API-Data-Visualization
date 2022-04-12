@@ -1,9 +1,11 @@
-function timeElement(){
-	translate(0, height/6)
+function timeElement() {
+	push()
+	translate(0, height / 7)
 
 	//
 	stroke(0)
-	textSize(80)
+
+	textAlign(CENTER)
 	fill("white")
 
 	currentTime = [hour() % 12, minute()]
@@ -18,10 +20,21 @@ function timeElement(){
 	}
 
 	//display time
-	text(currentTime[0] + ":" + currentTime[1], width / 2, 0)
-	translate(width/4.75, 0)
-	textSize(30)
-	text(amPM(), width / 2, 0)
+	if (width < height) {
+		textSize(width * 0.17)
+		text(currentTime[0] + ":" + currentTime[1], width / 2, 0)
+		translate(width / 4.75 + width * 0.08, 0)
+		textSize(width * 0.09)
+		text(amPM(), width / 2, 0)
+	} else {
+		textSize(width * 0.06)
+		text(currentTime[0] + ":" + currentTime[1],
+			width / 2, 0)
+		translate(width / 11, 0)
+		textSize(width * 0.035)
+		text(amPM(), width / 2, 0)
+	}
+	pop()
 }
 
 function amPM() {

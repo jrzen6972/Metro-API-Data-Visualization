@@ -3,11 +3,11 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
+<<<<<<< HEAD
 //let allTrains
 let pieArray = [
 	['Shady Grove', 'Shady Grove', 'Shady Grove'],
 	['Glenmont', 'Glenmont', 'Glenmont'],
-	// Test
 ];
 
 
@@ -23,6 +23,8 @@ let lineColors = {
 }
 
 //let locationDict = {}
+=======
+>>>>>>> caa5012885951c062ac54297f05ecb77fa4b1935
 
 function preload() {
 	stationData = loadJSON(stationUrl)
@@ -42,7 +44,6 @@ function setup() {
 
 	stations = stationData["Stations"]
 
-	//print(stations)
 	sel = createSelect();
 	sel.style("background", "gray")
 	sel.style("font-family", "Arial")
@@ -101,11 +102,15 @@ function setup() {
 function draw() {
 	background(28)
 
+	timeElement()
+
 	if (allTrains.length != 0) {
 		for (let i = 0; i < allTrains.length; i++) {
 			pieArray[i].display(allTrains, i)
 		}
+	
+		for(let i = 0; i<allTrains.length;i++){
+			pieArray[i].textPopUp()
+		}
 	}
-
-	timeElement()
 }
