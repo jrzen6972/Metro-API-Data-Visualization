@@ -16,6 +16,7 @@ function askWMATA() {
 	loadJSON(url, gotData, 'json')
 }
 
+// For Jeff: Array for end of the line station names go here.
 function gotData(data) {
 	allTrains = data["Trains"]
 }
