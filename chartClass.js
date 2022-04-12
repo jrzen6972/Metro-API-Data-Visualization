@@ -4,59 +4,46 @@ class chartClass {
 		this.Ypos = Y
 		this.hit = false
 		if (width > height) {
-			this.Size = width * 0.15 //200 //random(100,300)
+			this.Size = width * 0.15 //horizontal scale
 		} else {
-			this.Size = width * .25
+			this.Size = width * .25 //vertical scale
 		}
-		this.Rad = this.Size / 2
-		this.directedArr = []
-		this.newArr = []
+		this.Rad = this.Size / 2 //radius for hitbox purposes
 	}
 
 	display(data, index) {
-		//Individual train info
-		this.data = data[index]
+		this.data = data[index] //Individual train info
 
 		push()
-
-		//Circles
 		noStroke()
-		fill(0)
-		circle(this.Xpos, this.Ypos, this.Size)
+		fill(0) ; circle(this.Xpos, this.Ypos, this.Size) //background circle
 
 		if (this.data.Min == 'ARR' || this.data.Min == 'BRD') {
-			fill(lineColors[this.data.Line])
+			fill(lineInfo[this.data.Line][0])
 		} else {
 			fill(0)
 		}
-		circle(this.Xpos, this.Ypos, this.Size * 0.95) //Dynamic colored circle background
+		circle(this.Xpos, this.Ypos, this.Size * 0.95) //circle background colored when arc disappears
 
-		fill(lineColors[this.data.Line]) //fill based on line color
-		arc(this.Xpos, this.Ypos, this.Size * 0.95, this.Size * .95, 270, 270 - (15 * this.data.Min)) //Dynamically adjusted arc
+		fill(lineInfo[this.data.Line][0]) //fill based on line color
+		arc(this.Xpos, this.Ypos, this.Size * 0.95, this.Size * .95, 270, 270 - (10 * this.data.Min)) //Dynamically adjusted arc | each notch 1/36 mins
 
-		fill(0)
-		circle(this.Xpos, this.Ypos, this.Size * 0.875) //Black inner circle
+		fill(0) ; circle(this.Xpos, this.Ypos, this.Size * 0.875) //first inner circle covering arc
 
 		if (this.data.Min == 'ARR') {
 			fill(248, 231, 28)
 		} else if (this.data.Min == 'BRD') {
 			fill(43, 179, 37)
 		}
-		circle(this.Xpos, this.Ypos, this.Size * 0.75) //Conditionally colored inner circle
+		circle(this.Xpos, this.Ypos, this.Size * 0.75) //Conditionally colored ring
 
-		fill(0)
-		circle(this.Xpos, this.Ypos, this.Size * 0.70) //Black inner circle
+		fill(0) ; circle(this.Xpos, this.Ypos, this.Size * 0.70) //Black innermost circle
 
-
-
-		noStroke()
-		strokeWeight(this.Size * 0.01)
-		fill(lineColors[this.data.Line])
 		textAlign(CENTER)
-		textSize(this.Size * 0.13) //Textsize and outline scale with size
-		text(this.data.Destination + "\n" + this.data.Min, this.Xpos, this.Ypos + this.Size * 0.05) //Text
-		noStroke()
-		fill(0)
+		fill(lineInfo[this.data.Line][0])
+		textSize(this.Size * 0.13) ; text(this.data.Destination, this.Xpos, this.Ypos + this.Size * 0.05) //destination text
+		fill(255)
+		textSize(this.Size*0.11) ; text(this.data.Min, this.Xpos, this.Ypos + this.Size * 0.225) //minute text
 		pop()
 	}
 
@@ -70,7 +57,7 @@ class chartClass {
 
 	stationsLeft(line, destination, currentStation) {
 		if (line != 'No') {
-			this.directedArr = lineStops[line].slice() //get the respective line's destinations
+			this.directedArr = lineInfo[line][1].slice() //get the respective line's destinations
 
 			if (this.directedArr.indexOf(destination) < this.directedArr.indexOf(currentStation)) {
 				this.newArr = this.directedArr.slice(this.directedArr.indexOf(destination), this.directedArr.indexOf(currentStation) + 1)
@@ -88,22 +75,17 @@ class chartClass {
 		if (this.hit) {
 			sel.hide()
 
-			fill(28, 170)
-			rect(0, 0, width, height)
-			textAlign(LEFT)
-			if (width < height) {
-				textSize(height / 35)
-			} else {
-				textSize(height / 35)
-			}
-			fill(255)
+			fill(28, 170) ; rect(0, 0, width, height) //popup transparent rect
+
+			fill(255) ; textAlign(LEFT)
+			textSize(height / 25) ; text("Remaining Stops:",width / 2 - this.Size, height / 19)
+			textSize(height / 35)
 			if (this.data.Line != "No"){
-				text("Remaining Stops: \n" + this.stationsLeft(this.data.Line, this.data.DestinationName, this.data.LocationName),
+				text("\n" + this.stationsLeft(this.data.Line, this.data.DestinationName, this.data.LocationName),
 					width / 2 - this.Size, height / 19)
 			}else{
-				text("No passenger train" + "\n No data",width / 2 - this.Size, height / 19)
+				text("No passenger train" + "\nNo data",width / 2 - this.Size, height / 19)
 			}
-			// boxPopped = true
 		}
 	}
 }
