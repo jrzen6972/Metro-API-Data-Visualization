@@ -12,18 +12,27 @@ stationURL = 'https://api.wmata.com/Rail.svc/json/jStations?api_key=' + apiKey
 // The following code is inspired by this: https://editor.p5js.org/Poupas/sketches/IH-UuIUT
 
 let counter; // Change to show live feed of train's pos.
+let sel;
 
 function preload() {
-	pathData = loadJSON(pathUrl_RD) // Set to Red Line
+	pathData = loadJSON(pathUrl_RD)
 	stationData = loadJSON(stationURL)
 }
 
 function setup() {
-	createCanvas(windowWidth/2, windowHeight/2);
+	createCanvas(windowWidth, windowHeight/2);
 
-	if(width<height){
-		mobile = true
-	}
+	sel = createSelect();
+	sel.option('Red Line')
+	sel.option('Blue Line')
+	sel.option('Yellow Line')
+	sel.option('Orange Line')
+	sel.option('Green Line')
+	sel.option('Silver Line')
+	sel.position(windowWidth/2, windowHeight/2 + 50);
+	sel.style("text-align", "center")
+	sel.size(width * 0.55, height * 0.059)
+	// sel.changed(chooseTrainLine); // Button choosing stuff is broken atm 
 	
 	stations = stationData['StationName']
 	
