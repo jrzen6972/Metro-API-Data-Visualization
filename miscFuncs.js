@@ -34,6 +34,16 @@ function askWMATA() {
 	loadJSON(url, gotData, 'json')
 }
 
+// function gotData(data) {
+// 	allTrains = data["Trains"]
+// }
+
+// function newFunc(array){
+//     return sortedArray
+// }
+
+// Stuff ain't working...
+
 function gotData(data) {
 	allTrains = data["Trains"]
 	sortTrains(allTrains)
