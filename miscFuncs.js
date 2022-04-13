@@ -19,5 +19,3 @@ function askWMATA() {
 function gotData(data) {
 	allTrains = data["Trains"]
 }
-
-// test commit to jeff-branch (hopefully)
