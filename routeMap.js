@@ -32,7 +32,7 @@ function setup() {
 	sel.position(windowWidth/2, windowHeight/2 + 50);
 	sel.style("text-align", "center")
 	sel.size(width * 0.55, height * 0.059)
-	// sel.changed(chooseTrainLine); // Button choosing stuff is broken atm 
+	// sel.changed(chooseTrainLine); // Menu selection stuff is broken atm 
 	
 	stations = stationData['StationName']
 	
