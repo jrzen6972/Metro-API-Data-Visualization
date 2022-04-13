@@ -1,5 +1,8 @@
-apiKey = '5c858b68030b4c2ba24baf6cd609d6dd'
+apiKey = 'bce8f914a243405e80a73d82e0de2d2b'
 stationUrl = 'https://api.wmata.com/Rail.svc/json/jStationParking?api_key=' + apiKey
+
+// let newFile = [];
+var button;
 
 function preload(){
 	stationData = loadJSON(stationUrl)
@@ -17,6 +20,11 @@ function getStation(){
 }
 
 function setup() {
+	// Button text, location, and action
+	button = createButton('Button here xd');
+	button.position(width/2, height/2);
+	button.mousePressed(openDEV);
+	
 	getStation()
 	//Graph display for Total spots available
 	const ctx1 = document.getElementById('chart1').getContext('2d');
@@ -80,6 +88,10 @@ function setup() {
         }
     }
 });
+}
+
+function openDEV() {
+	window.open('https://openprocessing.org/sketch/1539883/pc/abCR7UU0');
 }
 	
 //all day parking
