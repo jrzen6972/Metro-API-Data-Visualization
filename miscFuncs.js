@@ -17,5 +17,13 @@ function askWMATA() {
 }
 
 function gotData(data) {
-	allTrains = data["Trains"]
+    allTrains = data["Trains"]
+    newFunc(allTrains)
+}
+
+function newFunc(array){
+	
+    //shit that sorts it
+
+    return sortedArray
 }
