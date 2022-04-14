@@ -18,7 +18,7 @@ function timeElement() {
 	}
 
 	//display time
-	if (width < height) { //mobile scale
+	if (mobile) { //mobile scale
 		textSize(width * 0.17)
 		text(currentTime[0] + ":" + currentTime[1], width / 2, 0)
 		translate(width / 4.75 + width * 0.08, 0)
@@ -30,7 +30,7 @@ function timeElement() {
 			width / 2, 0)
 		translate(width / 11, 0)
 		textSize(width * 0.035)
-		text(amPM(), width / 2, 0)
+		text(amPM(), width / 2 + 30, 0)
 	}
 	pop()
 }

@@ -4,6 +4,7 @@ url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_ke
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
 function preload() {
+	me = getCurrentPosition()
 	stationData = loadJSON(stationUrl) //run 1 time request for stations
 	askWMATA()	//get info for trains
 
@@ -14,6 +15,10 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+
+	if(width<height){
+		mobile = true
+	}
 
 	locationDict = createStringDict("sample", "e")
 	locationDict.remove("sample")
@@ -28,10 +33,10 @@ function setup() {
 	sel.center()
 	sel.style("text-align", "center")
 	sel.size(width * 0.55, height * 0.059)
-	if(width>height){
-		sel.position(width / 2 - sel.width / 2, height / 2 + sel.height * 2)
-	}else{
+	if(mobile){
 		sel.position(width / 2 - sel.width / 2, height / 2 + (height/6) + sel.height * 2)
+	}else{
+		sel.position(width / 2 - sel.width / 2, height / 2 + sel.height * 2)
 	}
 	sel.changed(updateUrl)
 
@@ -45,6 +50,10 @@ function setup() {
 			sel.option(stations[i].Name)
 		}
 	}
+	userCoords = [me.latitude,me.longitude]
+
+	onLaunch()
+		
 
 	textAlign(CENTER)
 	angleMode(DEGREES)
@@ -52,34 +61,35 @@ function setup() {
 
 	setInterval(askWMATA, 1500) //request every 1.5 seconds
 
-	if (width > height) { //horizontal / desktop view
-		//scaling
-		xOrigin = (width / 40 + width * 0.065)
-		xMulti = (width / 12 + width * 0.08)
-		y = height / 2.75
-
-		//populate pieArray
-		for (let i = 0; i < allTrains.length; i++) {
-			pieArray[i] = new chartClass(xOrigin + xMulti * i, y)
-		}
-	} else { //mobile view
+	if (mobile) {  //mobile view
 		//scaling
 		xOrigin = (width / 5)
 		xMulti = (width / 4 + width * 0.04)
 		y = height / 3 - 45
 		y2 = height / 1.83
-
+	
 		//populate pieArray
-		for (let i = 0; i < allTrains.length / 2; i++) {
+		for (let i = 0; i < 6 / 2; i++) {
 			pieArray[i] = new chartClass(xOrigin + xMulti * i, y) //upper level
 			pieArray[i + 3] = new chartClass(xOrigin + xMulti * i, y2) //lower level
 		}
+	} else { //desktop view
+		//scaling
+		xOrigin = (width / 40 + width * 0.065)
+		xMulti = (width / 12 + width * 0.08)
+		y = height / 2.75
+	
+		//populate pieArray
+		for (let i = 0; i < 6; i++) {
+			pieArray[i] = new chartClass(xOrigin + xMulti * i, y)
+		}
 	}
-
+	
 }
 
 function draw() {
 	background(28)
+	
 
 	timeElement() //display clock
 

@@ -1,5 +1,6 @@
 let pieArray = []; //create empty array for chartClass objs
 
+let mobile = false //status if in mobile mode
 //station routes in order by line
 redLine = ['Shady Grove', 'Rockville', 'Twinbrook', 'White Flint', 'Grosvenor-Strathmore',
 'Medical Center', 'Bethesda', 'Friendship Heights', 'Tenleytown-AU', 'Van Ness-UDC',
@@ -47,5 +48,6 @@ let lineInfo = {
 	'SV': [[145, 157, 157],silverLine],
 	'GR': [[0, 177, 64],greenLine],
 	'YL': [[255, 209, 0],yellowLine],
-	'No': "gray"
+	'No': "gray",
+	'--': "gray"
 }
