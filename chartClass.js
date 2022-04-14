@@ -26,7 +26,7 @@ class chartClass {
 		circle(this.Xpos, this.Ypos, this.Size * 0.95) //circle background colored when arc disappears
 
 		fill(lineInfo[this.data.Line][0]) //fill based on line color
-		arc(this.Xpos, this.Ypos, this.Size * 0.95, this.Size * .95, 270, 270 - (10 * this.data.Min)) //Dynamically adjusted arc | each notch 1/36 mins
+		arc(this.Xpos, this.Ypos, this.Size * 0.95, this.Size * .95, 270, 270 - damper(10 * this.data.Min)) //Dynamically adjusted arc | each notch 1/36 mins
 
 		fill(0) ; circle(this.Xpos, this.Ypos, this.Size * 0.875) //first inner circle covering arc
 
