@@ -1,5 +1,5 @@
 function mouseClicked() {
-	sel.show() //brings back menu after toggled off by .clickedOn()
+	sel.show()
 
 	for (j = 0; j < pieArray.length; j++) {
 		pieArray[j].clickedOn(mouseX, mouseY);
@@ -9,71 +9,40 @@ function mouseClicked() {
 function updateUrl() {
 	locCode = locationDict.get(sel.value())
 	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
-	loadJSON(url, gotData, 'json') //only works on local | updates url immedately after swapping
+	//loadJSON(url, gotData, 'json') only works on local
 }
 
 function askWMATA() {
 	loadJSON(url, gotData, 'json')
 }
 
-// function gotData(data) {
-// 	allTrains = data["Trains"]
-// }
-
-// function newFunc(array){
-//     return sortedArray
-// }
-
-// Stuff ain't working...
-
 function gotData(data) {
 	allTrains = data["Trains"]
-	newFunc(allTrains)
+	sortTrains(allTrains)
 }
 
-const groupData = [
-	{group: "2"},
-	{group: "1"},
-	{group: "2"},
-	{group: "1"},
-	{group: "2"},
-	{group: "1"}
-];
-
-function newFunc(array){
-	// url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + apiKey
-	// loadJSON(url, gotData, 'json')
-
-	let sortedArray = groupData.groupBy( ({ group }) => group );
-
-    return sortedArray
+function sortTrains(arr){
+	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1)
+	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1) || (a.Min < b.Min) ? 1:-1
 }
 
+function onLaunch(){
 
-// function gotData(data) {
-//     allTrains = data["Trains"]
-//     sortedArray(allTrains)
-// }
+sel.value(findClosest().Name)
 
-// const groupData = [
-// 	{"Group":"2"},
-// 	{"Group":"1"},
-// 	{"Group":"2"},
-// 	{"Group":"1"},
-// 	{"Group":"2"},
-// 	{"Group":"1"}
-// ];
+locCode = locationDict.get(findClosest().Name)
+url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
+askWMATA()
+}
 
-// function sortedArray(array){
-// 	let result = groupData.groupBy( ({ Group }) => Group );
-//     return sortedArray
-// };
+const dampingFactor = 0.05;
 
-// const groupData = [
-// 	{"DestinationName":"Shady Grove","Group":"2"},
-// 	{"DestinationName":"Glenmont","Group":"1"},
-// 	{"DestinationName":"Shady Grove","Group":"2"},
-// 	{"DestinationName":"Glenmont","Group":"1"},
-// 	{"DestinationName":"Shady Grove","Group":"2"},
-// 	{"DestinationName":"Glenmont","Group":"1"}
-// ];
+damper = Damper();
+
+function Damper(val) {
+    this.val = 0;
+    function f(val) {
+        return this.val += dampingFactor * (val - this.val);
+    }
+    return f;
+}
