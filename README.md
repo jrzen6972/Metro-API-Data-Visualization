@@ -40,11 +40,17 @@ The sole library we are using is p5.js. Being a heavily graphical library, p5.js
 
 This project has taken on a much different style since our brainstorming, but lends to a much better visualization. With the data the API provides, a static visualization would not be as useful. Creating a dynamic visualization that does not follow a traditional map, allows for more attention to be given to the data channels.
 
-Currently, we are wortking on:
+Currently, we are working on:
 
-- Seperating/ordering trains by group
-- Fitting in the true time of the trains' predicted times as an integer somewhere within the visual
+✔️ Seperating/ordering trains by group
+✔️ Fitting in the true time of the trains' predicted times as an integer somewhere within the visual
 - Adding more interativity functions, such as showing route destinations and outages, to name a few. 
+
+Thursday, April 14th Update / New Schedule:
+
+- Outage Information
+- Adding Animations to improve smooth-ness of the visualization
+- Seperate filtering by line, limiting selection from one large one
 
 We aim to complete these items in time by the video demo on Friday, April 15. As of the writing of this readme, we have no issues with reaching the deadline. 
 
