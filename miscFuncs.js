@@ -45,4 +45,5 @@ function Damper(val) {
         return this.val += dampingFactor * (val - this.val);
     }
     return f;
+	
 }
