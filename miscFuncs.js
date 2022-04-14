@@ -35,15 +35,15 @@ url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCod
 askWMATA()
 }
 
-const dampingFactor = 0.05;
+// const dampingFactor = 0.05;
 
-damper = Damper();
+// damper = Damper();
 
-function Damper(val) {
-    this.val = 0;
-    function f(val) {
-        return this.val += dampingFactor * (val - this.val);
-    }
-    return f;
+// function Damper(val) {
+//     this.val = 0;
+//     function f(val) {
+//         return this.val += dampingFactor * (val - this.val);
+//     }
+//     return f;
 	
-}
+// }
