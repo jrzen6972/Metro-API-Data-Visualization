@@ -36,7 +36,7 @@ function timeElement() {
 }
 
 function amPM() {
-	if (hour() > 12) {
+	if (hour() >= 12) {
 		return "PM"
 	} else {
 		return "AM"
