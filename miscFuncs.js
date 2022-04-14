@@ -18,4 +18,10 @@ function askWMATA() {
 
 function gotData(data) {
 	allTrains = data["Trains"]
+	sortTrains(allTrains)
+}
+
+function sortTrains(arr){
+	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1) //|| (a.Min < b.Min) ? 1:-1
+	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1) || (a.Min < b.Min) ? 1:-1
 }
