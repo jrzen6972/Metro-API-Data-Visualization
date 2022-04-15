@@ -85,22 +85,34 @@ function setup() {
 			pieArray[i] = new chartClass(xOrigin + xMulti * i, y)
 		}
 	}
-	
+
+	y = height / 1.75
+	for (let i = 0; i < 6; i++) {
+		boxArray[i] = new barObj(xOrigin + 100 + (250 * i), y)
+	}
+	//avgVis elements
+	createVis2Elements()	
 }
 
 function draw() {
 	background(28)
 	
 
-	timeElement() //display clock
-
-	if (allTrains.length != 0) {
-		for (let i = 0; i < allTrains.length; i++) {
-			pieArray[i].display(allTrains, i) //show train dots(inputting train data)
+	if(state){
+		timeElement() //display clock
+		if (allTrains.length != 0) {
+			for (let i = 0; i < allTrains.length; i++) {
+				pieArray[i].display(allTrains, i) //show train dots(inputting train data)
+			}
+		
+			for(let i = 0; i<allTrains.length;i++){
+				pieArray[i].textPopUp()	//ensure popups are above all dots
+			}
 		}
-	
-		for(let i = 0; i<allTrains.length;i++){
-			pieArray[i].textPopUp()	//ensure popups are above all dots
+	} else {
+		rectMode(CORNER)
+		for (let i = 0; i < boxArray.length; i++) {
+			boxArray[i].display(avgArray, i,loggedDates) //show train dots(inputting train data)
 		}
 	}
 }
