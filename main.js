@@ -60,6 +60,7 @@ function setup() {
 	textFont(HNB)
 
 	setInterval(askWMATA, 1500) //request every 1.5 seconds
+	setInterval(cacheData,60000) //cache data every minute
 
 	if (mobile) {  //mobile view
 		//scaling
