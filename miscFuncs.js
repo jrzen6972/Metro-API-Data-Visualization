@@ -6,6 +6,10 @@ function mouseClicked() {
 	}
 }
 
+function keyPressed(){
+	getHour(23)
+}
+
 function updateUrl() {
 	locCode = locationDict.get(sel.value())
 	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
