@@ -6,8 +6,22 @@ function mouseClicked() {
 	}
 }
 
-function keyPressed(){
-	getHour(23)
+function toggleState(){
+	state = !state	
+
+	if(!state){
+	inpHour.show()
+	inpMonth.show()
+	inpDay.show()
+	searchButt.show()
+	clearButt.show()
+	}else{
+		inpHour.hide()
+		inpMonth.hide()
+		inpDay.hide()
+		searchButt.hide()
+		clearButt.hide()
+	}
 }
 
 function updateUrl() {
