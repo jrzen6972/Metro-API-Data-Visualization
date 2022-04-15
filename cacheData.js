@@ -5,22 +5,34 @@ function cacheData(){
     storeItem(date+"-"+time,allTrains)
 }
 
-function getHour(hour){
-    tempArr = []
-    for(let i = 0;i<60;i+=5){
-        tempVal = getItem("2022,4,14-"+hour+","+i)
-        tempArr[i] = tempVal
-    }
-    processData(tempArr)
-}
+// function getHour(hour){ to be revised later
+//    let tempArr = []
+//     for(let i = 0;i<60;i++){
+//         tempVal = getItem("2022,4,14-"+hour+","+i)
+//         tempArr[i] = tempVal
+//     }
+//     return processData(tempArr)
+// }
+
+function getHour2(day,hour){ //working func
+    let tempArr = []
+     for(let i = 0;i<60;i++){
+         tempVal = getItem("2022,4," + day+ "-" +hour+","+i)
+         if(tempVal == null){
+            tempVal = [{Car: null, Min: 1}]
+        }
+         tempArr[i] = tempVal
+     }
+    return processData(tempArr)
+ }
 
 function processData(arr){
-    tempArr = []
+    let tempArr = []
     counter = 0
-    for(let i =0; i<arr.length; i+=5){
+    for(let i =0; i<arr.length; i++){
         for(let j = 0; j<arr[i].length;j++){
             tempVal = arr[i][j].Min
-            if(tempVal == 0 || tempVal == "ARR" || tempVal == "BRD"){
+            if(tempVal == 0 || tempVal == "ARR" || tempVal == "BRD" || tempVal == "---"){
                 tempVal = 0
             } else {
                 tempVal = int(tempVal)
@@ -29,9 +41,7 @@ function processData(arr){
             counter++
         }
     }
-    print(tempArr)
-    print(calculateAvg(tempArr))
-   // print(arr[0][0].Min)
+    return calculateAvg(tempArr)
 }
 
 function calculateAvg(arr){
