@@ -1,4 +1,4 @@
-state = false
+state = true
 
 boxArray = []
 
@@ -15,28 +15,26 @@ function createVis2Elements(){
 
     inpMonth = createInput("April")
     inpMonth.position(50,50)
-   // inpMonth.hide()
+    inpMonth.hide()
 
     inpDay = createInput("Input a Day")
     inpDay.position(50,100)
-   // inpDay.hide()
+    inpDay.hide()
 
 
 	inpHour = createInput("Input an Hour")
     inpHour.position(50,200)
-    //inpHour.hide()
+    inpHour.hide()
 
     searchButt = createButton('Search')
     searchButt.position(50,300)
    	searchButt.mousePressed(updateNood)
-   // searchButt.hide()
+    searchButt.hide()
 
     clearButt = createButton('Clear Selection')
     clearButt.position(50, 400)
    	clearButt.mousePressed(clearSelection)
-    //clearButt.hide()
-
-	//getHour(noodle)
+    clearButt.hide()
 }
 
 function updateNood(){
