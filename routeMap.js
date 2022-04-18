@@ -8,9 +8,9 @@ let counter;
 function preload() {
 	stationData = loadJSON(pathUrl)
 	
-	// Fonts, come back later
-	// HNB = loadFont("HelveticaNeue Bold.ttf")
-	// HNM = loadFont("HelveticaNeue Medium.ttf")
+	// Load Fonts
+	HNB = loadFont("HelveticaNeue Bold.ttf")
+	HNM = loadFont("HelveticaNeue Medium.ttf")
 }
 
 function setup() {
