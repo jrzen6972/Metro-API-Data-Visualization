@@ -1,16 +1,18 @@
 apiKey = 'bce8f914a243405e80a73d82e0de2d2b'
 pathUrl = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStationCode=G05&api_key=' + apiKey
+// https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStationCode=G05&api_key=bce8f914a243405e80a73d82e0de2d2b
 
-// pathUrl = 'https://developer.wmata.com/docs/services/5476364f031f590f38092507/export?DocumentFormat=Swagger'
+
+// The following code is inspired by this: https://editor.p5js.org/Poupas/sketches/IH-UuIUT
 
 let counter;
 
 function preload() {
 	stationData = loadJSON(pathUrl)
 	
-	// Load Fonts
-	HNB = loadFont("HelveticaNeue Bold.ttf")
-	HNM = loadFont("HelveticaNeue Medium.ttf")
+	// Fonts, come back later
+	// HNB = loadFont("HelveticaNeue Bold.ttf")
+	// HNM = loadFont("HelveticaNeue Medium.ttf")
 }
 
 function setup() {
@@ -28,13 +30,15 @@ function stationPaths() {
 	routeMap = 	stationData['Path'];
 	
 	// Shows the two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR, or SV) this station's platform is on.
+	// Currently, API is set to ONLY show the Silver Line (SV)
 	lineCode = stationData['Path'].LineCode 
 	
-	// Full name for this station, as shown on the WMATA website.
-	stationName1 = stationData['Path'].StationName // Current issues: is undefined. perhaps need a [] between stationData and ['Path']
-	stationName2 = stationData['Path'].StationName
+	// Full name or code for this station, as shown on the WMATA website.
+	stationCode1 = stationData['Path'][0].StationCode
+	stationCode2 = stationData['Path'][3].StationCode	// stationName or stationCode from StationName
+	// stationCode1 = stationData['N06']['Path'].StationCode
 	
-	distancePrev = stationData['Path'].DistanceToPrev
+	distancePrev = stationData['Path'].DistanceToPrev // Undef as well. Need to find two locations
 }
 
 function draw() {
@@ -48,7 +52,7 @@ function draw() {
   fill(0,255,0);
   textSize(32);
   textFont('monospace')
-  let txt = text('Distance between '+ stationName1 + ' and ' + stationName2 + ': '+ sVal + '%',0,middle-20);
+  let txt = text('Distance between '+ stationCode1 + ' and ' + stationCode2 + ': '+ sVal + '%',0,middle-20); // See stationCode/stationName above in stationPaths()
   
   rect(0,middle,Progress,20,15)
   stroke(0,255,0)
@@ -82,59 +86,6 @@ class Count{
     this.s = 0
   }
 }
-
-// The following code is inspired by this: https://editor.p5js.org/Poupas/sketches/IH-UuIUT
-
-// let counter;
-// function setup() {
-//   createCanvas(400, 400);
-//   counter = new Count(0,100)
-//   counter.start();
-// }
-
-// function draw() {
-//   background(0);
-//   let middle = height/2;
-//   let sVal = counter.s;
-//   let Progress = map(sVal,0,100,0,width);
-  
-//   fill(0,255,0);
-//   textSize(32);
-//   textFont('monospace')
-//   let txt = text('Progress : '+ sVal + '%',0,middle-20);
-  
-//   rect(0,middle,Progress,20,15)
-//   stroke(0,255,0)
-//   noFill();
-//   rect(0,middle,width,20,15)
-  
-//   if (floor(random(300)) == 100) {
-//     counter.reset();
-//   }
-  
-// }
-
-// class Count{
-//   constructor(s,w){
-//     this.s = s
-//     this.w = w
-//     this.p = createP('')
-//   }
-//   start(){
-//     if (!this.done) {
-//       setInterval(() => this.counter(),this.w)
-//     }
-//   }
-//   counter(){
-//     if(this.s < 100){
-//       this.s ++
-//       this.p.html(this.s)
-//     }
-//   }
-//   reset(){
-//     this.s = 0
-//   }
-// }
 
 
 // Below is older code from somewhere else, probably won't use.
