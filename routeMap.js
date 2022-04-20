@@ -5,7 +5,7 @@ pathUrl = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStati
 
 // The following code is inspired by this: https://editor.p5js.org/Poupas/sketches/IH-UuIUT
 
-let counter;
+let counter; // Change
 
 function preload() {
 	stationData = loadJSON(pathUrl)
@@ -31,14 +31,13 @@ function stationPaths() {
 	
 	// Shows the two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR, or SV) this station's platform is on.
 	// Currently, API is set to ONLY show the Silver Line (SV)
-	lineCode = stationData['Path'].LineCode 
+	lineCode = stationData['Path'][0].LineCode 
 	
 	// Full name or code for this station, as shown on the WMATA website.
 	stationCode1 = stationData['Path'][0].StationCode
 	stationCode2 = stationData['Path'][3].StationCode	// stationName or stationCode from StationName
-	// stationCode1 = stationData['N06']['Path'].StationCode
 	
-	distancePrev = stationData['Path'].DistanceToPrev // Undef as well. Need to find two locations
+	distancePrev = stationData['Path'][3].DistanceToPrev // Undef as well. Need to find two locations
 }
 
 function draw() {
@@ -52,7 +51,7 @@ function draw() {
   fill(0,255,0);
   textSize(32);
   textFont('monospace')
-  let txt = text('Distance between '+ stationCode1 + ' and ' + stationCode2 + ': '+ sVal + '%',0,middle-20); // See stationCode/stationName above in stationPaths()
+  let txt = text('Distance between '+ stationCode1 + ' and ' + stationCode2 + ': '+ distancePrev + ' feet.',0,middle-20); // See stationCode/stationName above in stationPaths()
   
   rect(0,middle,Progress,20,15)
   stroke(0,255,0)
