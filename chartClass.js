@@ -4,7 +4,7 @@ class chartClass {
 		this.Ypos = Y
 		this.hit = false
 		if (width > height) {
-			this.Size = width * 0.15 //horizontal scale
+			this.Size = (width * 0.15)*.75 //horizontal scale
 		} else {
 			this.Size = width * .25 //vertical scale
 		}

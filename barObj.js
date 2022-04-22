@@ -17,9 +17,11 @@ class barObj {
 		rect(this.X, this.Y, this.wid, -this.data * this.scaling)
 
 		fill(255)
-		textSize(this.scaling*4)
-		text(this.data, this.X+35, this.Y - this.data * this.scaling - 6)
-        textSize(this.scaling*2)
-        text(this.date, this.X+35, this.Y - 50)
+		textAlign(CENTER)
+		textSize(this.scaling*3.5)
+		text(this.data + "m", this.X+45, this.Y - this.data * this.scaling-6)
+        textSize(this.scaling*1.75)
+		textAlign(LEFT)
+        text(this.date, this.X, this.Y+25)
 	}
 }

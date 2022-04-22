@@ -36,7 +36,7 @@ function setup() {
 	if(mobile){
 		sel.position(width / 2 - sel.width / 2, height / 2 + (height/6) + sel.height * 2)
 	}else{
-		sel.position(width / 2 - sel.width / 2, height / 2 + sel.height * 2)
+		sel.position(width / 2 - sel.width / 2, height *.92)
 	}
 	sel.changed(updateUrl)
 
@@ -76,9 +76,9 @@ function setup() {
 		}
 	} else { //desktop view
 		//scaling
-		xOrigin = (width / 40 + width * 0.065)
-		xMulti = (width / 12 + width * 0.08)
-		y = height / 2.75
+		xOrigin = (width / 40 + width * 0.055)
+		xMulti = (width / 12 + width * 0.04)
+		y = height * .3
 	
 		//populate pieArray
 		for (let i = 0; i < 6; i++) {
@@ -86,7 +86,7 @@ function setup() {
 		}
 	}
 
-	y = height / 1.75
+	y = height/2+275
 	for (let i = 0; i < 6; i++) {
 		boxArray[i] = new barObj(xOrigin + 100 + (250 * i), y)
 	}
@@ -96,9 +96,12 @@ function setup() {
 
 function draw() {
 	background(28)
-	
+		textAlign(CENTER)
+		textSize(width * 0.05)
+		text("WMATA API Live Data & Dashboard",width/2,100)
 
-	if(state){
+
+
 		timeElement() //display clock
 		if (allTrains.length != 0) {
 			for (let i = 0; i < allTrains.length; i++) {
@@ -109,10 +112,12 @@ function draw() {
 				pieArray[i].textPopUp()	//ensure popups are above all dots
 			}
 		}
-	} else {
+		textSize(32)
+		text("Average Train Wait Times",width*.33,height/2)
 		rectMode(CORNER)
 		for (let i = 0; i < boxArray.length; i++) {
 			boxArray[i].display(avgArray, i,loggedDates) //show train dots(inputting train data)
 		}
-	}
+		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
+	
 }
