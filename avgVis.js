@@ -8,38 +8,53 @@ loggedDates = []
 avgCounter = 0; avgArray = []
 
 function createVis2Elements(){
-    v2butt = createButton("Toggle Display")
-	v2butt.position(width / 1.2, height / 1.2)
-	v2butt.mousePressed(toggleState)
+    // v2butt = createButton("Toggle Display")
+	// v2butt.position(width / 1.2, height / 1.2)
+	// v2butt.mousePressed(toggleState)
 
-
-    inpMonth = createInput("April")
-    inpMonth.position(50,50)
-    inpMonth.hide()
+    selMonth = createSelect();
+	selMonth.style("background", "white")
+	selMonth.style("font-family", "Arial")
+	selMonth.center()
+	selMonth.style("text-align", "center")
+	selMonth.size(177,21)
+    selMonth.position(25,height/2+50)
+    for(const [key] of Object.entries(monthDict)){
+        selMonth.option(key)        
+    }
+    selMonth.value(findKey(monthDict,month()))
+    // selMonth.hide()
 
     inpDay = createInput("Input a Day")
-    inpDay.position(50,100)
-    inpDay.hide()
+    inpDay.position(25,height/2+100)
+    inpDay.style("text-align", "center")
+    inpDay.value(day())
+    // inpDay.hide()
 
-
-	inpHour = createInput("Input an Hour")
-    inpHour.position(50,200)
-    inpHour.hide()
+    inpSlider = createSlider(0,23,12,1)
+    inpSlider.position(-25,height/2+185)
+    inpSlider.style("transform", "rotate(-90deg)");
+    inpSlider.value(hour())
+    // inpSlider.hide()
 
     searchButt = createButton('Search')
-    searchButt.position(50,300)
+    searchButt.position(25,height/2+275)
    	searchButt.mousePressed(updateNood)
-    searchButt.hide()
+    // searchButt.hide()
 
     clearButt = createButton('Clear Selection')
-    clearButt.position(50, 400)
+    clearButt.position(25, height/2+325)
    	clearButt.mousePressed(clearSelection)
-    clearButt.hide()
+    // clearButt.hide()
 }
 
 function updateNood(){
-    avgArray[avgCounter] =  getHour2(inpDay.value(),inpHour.value())
-    loggedDates[avgCounter] = ["D: " + inpDay.value() + "\nH: " + inpHour.value()]
+    avgArray[avgCounter] =  getHour(sel.value(), monthDict[selMonth.value()],inpDay.value(),inpSlider.value())
+    loggedDates[avgCounter] = [
+        "Month: "+ selMonth.value() +
+        "\nDay: " + inpDay.value() + 
+        "\nHour: " + nM(inpSlider.value()%12)+ amPM(inpSlider.value()) +
+        "\nStation: " + sel.value()]
     avgCounter++
     print([avgArray, loggedDates])
 }

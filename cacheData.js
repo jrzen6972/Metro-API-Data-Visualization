@@ -2,22 +2,14 @@ function cacheData(){
     date = [year(),month(),day()]
     time = [hour(),minute()]
 
-    storeItem(date+"-"+time,allTrains)
+    storeItem(sel.value() + "," + date+"-"+time,allTrains)
 }
 
-// function getHour(hour){ to be revised later
-//    let tempArr = []
-//     for(let i = 0;i<60;i++){
-//         tempVal = getItem("2022,4,14-"+hour+","+i)
-//         tempArr[i] = tempVal
-//     }
-//     return processData(tempArr)
-// }
-
-function getHour2(day,hour){ //working func
+function getHour(station,month,day,hour){ 
+    print(station + ",2022," + month + "," + day+ "-" +hour+",")
     let tempArr = []
      for(let i = 0;i<60;i++){
-         tempVal = getItem("2022,4," + day+ "-" +hour+","+i)
+         tempVal = getItem(station + ",2022," + month + "," + day+ "-" +hour+","+i)
          if(tempVal == null){
             tempVal = [{Car: null, Min: 1}]
         }
