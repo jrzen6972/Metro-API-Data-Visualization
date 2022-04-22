@@ -7,21 +7,21 @@ function mouseClicked() {
 }
 
 function toggleState(){
-	state = !state	
+	//state = !state	
 
-	if(!state){
-	inpHour.show()
-	inpMonth.show()
-	inpDay.show()
-	searchButt.show()
-	clearButt.show()
-	}else{
-		inpHour.hide()
-		inpMonth.hide()
-		inpDay.hide()
-		searchButt.hide()
-		clearButt.hide()
-	}
+	//if(!state){
+		inpSlider.show()
+		selMonth.show()
+		inpDay.show()
+		searchButt.show()
+		clearButt.show()
+	// }else{
+	// 	inpSlider.hide()
+	// 	selMonth.hide()
+	// 	inpDay.hide()
+	// 	searchButt.hide()
+	// 	clearButt.hide()
+	// }
 }
 
 function updateUrl() {
@@ -45,10 +45,27 @@ function sortTrains(arr){
 }
 
 function onLaunch(){
+	sel.value(findClosest().Name)
+	locCode = locationDict.get(findClosest().Name)
+	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
+	askWMATA()
+}
 
-sel.value(findClosest().Name)
-
-locCode = locationDict.get(findClosest().Name)
-url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
-askWMATA()
+function findKey(object, value){
+    var keyArr=[];
+    for (let key in object)
+    {
+        if (object[key] === value) 
+        {
+            keyArr.push(key);
+        }
+    }
+    if(keyArr.length >0 )
+    {
+    return keyArr;
+    }
+    else
+    {
+        return "Not Found";
+    }
 }
