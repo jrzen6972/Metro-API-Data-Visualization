@@ -1,13 +1,17 @@
-// https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStationCode=G05&api_key=bce8f914a243405e80a73d82e0de2d2b
 apiKey = 'bce8f914a243405e80a73d82e0de2d2b'
-pathUrl_RD = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=A15&ToStationCode=B11&api_key=' + apiKey
-pathUrl_BL = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=J03&ToStationCode=G05&api_key=' + apiKey
-pathUrl_YL = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=E10&ToStationCode=C15&api_key=' + apiKey
-pathUrl_OR = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=K08&ToStationCode=D13&api_key=' + apiKey
-pathUrl_GR = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=E10&ToStationCode=F11&api_key=' + apiKey
-pathUrl_SV = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStationCode=G05&api_key=' + apiKey
 
-stationURL = 'https://api.wmata.com/Rail.svc/json/jStations?api_key=' + apiKey
+// https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStationCode=G05&api_key=bce8f914a243405e80a73d82e0de2d2b
+// pathUrl_RD = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=A15&ToStationCode=B11&api_key=' + apiKey
+// pathUrl_BL = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=J03&ToStationCode=G05&api_key=' + apiKey
+// pathUrl_YL = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=E10&ToStationCode=C15&api_key=' + apiKey
+// pathUrl_OR = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=K08&ToStationCode=D13&api_key=' + apiKey
+// pathUrl_GR = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=E10&ToStationCode=F11&api_key=' + apiKey
+// pathUrl_SV = 'https://api.wmata.com/Rail.svc/json/jPath?FromStationCode=N06&ToStationCode=G05&api_key=' + apiKey
+
+// stationURL = 'https://api.wmata.com/Rail.svc/json/jStations?api_key=' + apiKey
+
+// To-do: switch to station to station api: https://developer.wmata.com/docs/services/5476364f031f590f38092507/operations/5476364f031f5909e4fe3313?
+stationURL = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key' + apiKey
 
 // The following code is inspired by this: https://editor.p5js.org/Poupas/sketches/IH-UuIUT
 
