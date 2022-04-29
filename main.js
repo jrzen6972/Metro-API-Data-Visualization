@@ -3,6 +3,10 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
+stationUrl_rm = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
+
+let showText = false;
+
 function preload() {
 	me = getCurrentPosition()
 	stationData = loadJSON(stationUrl) //run 1 time request for stations
@@ -11,6 +15,8 @@ function preload() {
 	//loads fonts
 	HNB = loadFont("fonts/HelveticaNeue Bold.ttf")
 	HNM = loadFont("fonts/HelveticaNeue Medium.ttf")
+
+	stationData_rm = loadJSON(stationUrl_rm) // Loads Station to Station api url
 }
 
 function setup() {
@@ -24,6 +30,8 @@ function setup() {
 	locationDict.remove("sample")
 
 	stations = stationData["Stations"]
+	stations_rm = stationData_rm['StationToStationInfos']
+
 
 	//dropdown menu
 	sel = createSelect();
@@ -94,13 +102,24 @@ function setup() {
 	createVis2Elements()	
 }
 
+function stationPaths() {
+	routeMap = 	stationData_rm['Path'];
+	
+	railTime1 = stationData_rm['StationToStationInfos'][0].RailTime
+	sourceStation1 = stationData_rm['StationToStationInfos'][0].SourceStation
+	destStation1 = stationData_rm['StationToStationInfos'][0].DestinationStation
+}
+
 function draw() {
+	stationPaths()
+	let middle = windowHeight/2
+
+	// fill(0,255,0); // Text and ellipse color
+
 	background(28)
 		textAlign(CENTER)
 		textSize(width * 0.05)
 		text("WMATA API Live Data & Dashboard",width/2,100)
-
-
 
 		timeElement() //display clock
 		if (allTrains.length != 0) {
@@ -120,4 +139,31 @@ function draw() {
 		}
 		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
 	
+	// Can use library to set each station or line's stuff, idk
+	if (showText) {
+		// fill(0,255,0);
+		textSize(32);
+		// textFont('monospace')
+		let stationInfo_txt = text('Stations: '+ sourceStation1 + " and " + destStation1, 400, middle+100);
+		let railTime_txt = text('Estimated Time Remaining: '+ railTime1 + ' minutes.', 400, middle+150);
+	}
+	
+	// circle(30, 30, 20); // Just a circle
+	
+	// Ellipse Dot
+	// fill(0, 255, 0);
+	noStroke();
+	ellipse(1300, 750, 80, 80);
+	// ellipse(150, 50, 80, 80);
+	
 }
+
+function mousePressed() {
+	if (dist(mouseX,mouseY, 1300, 750) < 80) {
+		  showText = true;
+	  }
+	  else {
+		  showText = false;
+	  }
+	  
+  }
