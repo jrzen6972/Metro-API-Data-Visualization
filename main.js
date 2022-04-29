@@ -137,8 +137,8 @@ function draw() {
 	
 	// Information and text for average wait times using the station to station API
 	textSize(15);
-	let stationInfo_txt = text('Average ride time between '+ sourceStation1 + " and " + destStation1 + ": ", 1125, middle-125);
-	let railTime_txt = text(railTime1 + ' minutes.', 1125, middle-100);
+	let stationInfo_txt = text('Average ride time between '+ sourceStation1 + " and " + destStation1 + ": ", 1125, middle-25);
+	let railTime_txt = text(railTime1 + ' minutes.', 1125, middle);
 	
 	
 }
