@@ -5,8 +5,6 @@ stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
 stationUrl_rm = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
 
-let showText = false;
-
 function preload() {
 	me = getCurrentPosition()
 	stationData = loadJSON(stationUrl) //run 1 time request for stations
@@ -114,8 +112,6 @@ function draw() {
 	stationPaths()
 	let middle = windowHeight/2
 
-	// fill(0,255,0); // Text and ellipse color
-
 	background(28)
 		textAlign(CENTER)
 		textSize(width * 0.05)
@@ -132,38 +128,17 @@ function draw() {
 			}
 		}
 		textSize(32)
-		text("Average Train Wait Times",width*.33,height/2)
+		text("Average Train Wait Times", width*.33, height/2)
 		rectMode(CORNER)
 		for (let i = 0; i < boxArray.length; i++) {
 			boxArray[i].display(avgArray, i,loggedDates) //show train dots(inputting train data)
 		}
 		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
 	
-	// Can use library to set each station or line's stuff, idk
-	if (showText) {
-		// fill(0,255,0);
-		textSize(32);
-		// textFont('monospace')
-		let stationInfo_txt = text('Stations: '+ sourceStation1 + " and " + destStation1, 400, middle+100);
-		let railTime_txt = text('Estimated Time Remaining: '+ railTime1 + ' minutes.', 400, middle+150);
-	}
+	// Information and text for average wait times using the station to station API
+	textSize(15);
+	let stationInfo_txt = text('Average ride time between '+ sourceStation1 + " and " + destStation1 + ": ", 1125, middle-125);
+	let railTime_txt = text(railTime1 + ' minutes.', 1125, middle-100);
 	
-	// circle(30, 30, 20); // Just a circle
-	
-	// Ellipse Dot
-	// fill(0, 255, 0);
-	noStroke();
-	ellipse(1300, 750, 80, 80);
-	// ellipse(150, 50, 80, 80);
 	
 }
-
-function mousePressed() {
-	if (dist(mouseX,mouseY, 1300, 750) < 80) {
-		  showText = true;
-	  }
-	  else {
-		  showText = false;
-	  }
-	  
-  }
