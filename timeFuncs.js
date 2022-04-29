@@ -20,7 +20,7 @@ function timeElement() {
 	} else { //desktop scale
 		textSize(width * 0.06)
 		text(nM(currentTime[0]) + ":" + currentTime[1] + "\n"+ amPM(hour()),
-			width *.9, (height/2) + 350)
+			width *.9, height/2)
 	}
 }
 
