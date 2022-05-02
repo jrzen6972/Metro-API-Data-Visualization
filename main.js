@@ -3,6 +3,8 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
+stationUrl_rm = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
+
 function preload() {
 	me = getCurrentPosition()
 	stationData = loadJSON(stationUrl) //run 1 time request for stations
@@ -11,6 +13,8 @@ function preload() {
 	//loads fonts
 	HNB = loadFont("fonts/HelveticaNeue Bold.ttf")
 	HNM = loadFont("fonts/HelveticaNeue Medium.ttf")
+
+	stationData_rm = loadJSON(stationUrl_rm) // Loads Station to Station api url
 }
 
 function setup() {
@@ -24,6 +28,8 @@ function setup() {
 	locationDict.remove("sample")
 
 	stations = stationData["Stations"]
+	stations_rm = stationData_rm['StationToStationInfos']
+
 
 	//dropdown menu
 	sel = createSelect();
@@ -94,13 +100,22 @@ function setup() {
 	createVis2Elements()	
 }
 
+function stationPaths() {
+	routeMap = 	stationData_rm['Path'];
+	
+	railTime1 = stationData_rm['StationToStationInfos'][0].RailTime
+	sourceStation1 = stationData_rm['StationToStationInfos'][0].SourceStation
+	destStation1 = stationData_rm['StationToStationInfos'][0].DestinationStation
+}
+
 function draw() {
+	stationPaths()
+	let middle = windowHeight/2
+
 	background(28)
 		textAlign(CENTER)
 		textSize(width * 0.05)
 		text("WMATA API Live Data & Dashboard",width/2,100)
-
-
 
 		timeElement() //display clock
 		if (allTrains.length != 0) {
@@ -113,11 +128,17 @@ function draw() {
 			}
 		}
 		textSize(32)
-		text("Average Train Wait Times",width*.33,height/2)
+		text("Average Train Wait Times", width*.33, height/2)
 		rectMode(CORNER)
 		for (let i = 0; i < boxArray.length; i++) {
 			boxArray[i].display(avgArray, i,loggedDates) //show train dots(inputting train data)
 		}
 		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
+	
+	// Information and text for average wait times using the station to station API
+	textSize(20);
+	let stationInfo_txt = text('Average ride time between ', width * 0.78, height/2.75);
+	let railTime_txt = text(sourceStation1 + " and " + destStation1 + ": " + railTime1 + ' minutes.', width * 0.78, height/2.55);
+	
 	
 }
