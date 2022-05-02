@@ -27,16 +27,27 @@ function toggleState(){
 function updateUrl() {
 	locCode = locationDict.get(sel.value())
 	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
-	//loadJSON(url, gotData, 'json') only works on local
+
+	// locCode2 = locationDict.get(selTime.value())
+	urlTime = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo' + locCode + '&api_key=' + apiKey
 }
 
 function askWMATA() {
 	loadJSON(url, gotData, 'json')
 }
 
+function askRailTime() {
+	loadJSON(urlTime, gotDataTime, 'json')
+}
+
 function gotData(data) {
 	allTrains = data["Trains"]
 	sortTrains(allTrains)
+}
+
+function gotDataTime(data) {
+	allTime = data["StationToStationInfos"]
+	allTime.print()
 }
 
 function sortTrains(arr){

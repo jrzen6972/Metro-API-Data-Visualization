@@ -3,7 +3,7 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
-stationUrl_rm = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
+urlTime = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
 
 function preload() {
 	me = getCurrentPosition()
@@ -14,7 +14,8 @@ function preload() {
 	HNB = loadFont("fonts/HelveticaNeue Bold.ttf")
 	HNM = loadFont("fonts/HelveticaNeue Medium.ttf")
 
-	stationData_rm = loadJSON(stationUrl_rm) // Loads Station to Station api url
+	stationData_rm = loadJSON(urlTime) // Loads Station to Station api url
+	askRailTime()
 }
 
 function setup() {
@@ -31,7 +32,7 @@ function setup() {
 	stations_rm = stationData_rm['StationToStationInfos']
 
 
-	//dropdown menu
+	//dropdown menu — General (bottom)
 	sel = createSelect();
 	sel.style("background", "gray")
 	sel.style("font-family", "Arial")
@@ -46,14 +47,26 @@ function setup() {
 	}
 	sel.changed(updateUrl)
 
+	//dropdown menu for RailTime
+	// selTime = createSelect();
+	// selTime.style("background", "gray")
+	// selTime.style("font-family", "Arial")
+	// selTime.style("font-size", width / 46 + "px")
+	// selTime.position(windowWidth * 0.75, windowHeight * 0.37)
+	// selTime.style("text-align", "center")
+	// selTime.size(width * 0.25, height * 0.059)
+	// selTime.changed(updateTimeUrl)
+
 	//Populate Location Dictionary and Dropdown Box
 	for (let i = 0; i < stations.length; i++) {
 		if (stations[i].Name == "Metro Center" || stations[i].Name == "Gallery Pl-Chinatown" || stations[i].Name == "L'Enfant Plaza" || stations[i].Name == "Fort Totten") {
 			locationDict.create(stations[i].Name + i, stations[i].Code)
-			sel.option(stations[i].Name + i)
+			sel.option(stations[i].Name + i) // Bottom drop down menu
+			// selTime.option(stations[i].Name + i) // For the time being, a menu for rail time
 		} else {
 			locationDict.create(stations[i].Name, stations[i].Code)
-			sel.option(stations[i].Name)
+			sel.option(stations[i].Name + i) // Bottom drop down menu
+			// selTime.option(stations[i].Name + i) // For the time being, a menu for rail time
 		}
 	}
 	userCoords = [me.latitude,me.longitude]
@@ -66,6 +79,7 @@ function setup() {
 	textFont(HNB)
 
 	setInterval(askWMATA, 1500) //request every 1.5 seconds
+	setInterval(askRailTime,1500) 
 	setInterval(cacheData,60000) //cache data every minute
 
 	if (mobile) {  //mobile view
@@ -135,10 +149,16 @@ function draw() {
 		}
 		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
 	
-	// Information and text for average wait times using the station to station API
-	textSize(20);
-	let stationInfo_txt = text('Average ride time between ', width * 0.78, height/2.75);
-	let railTime_txt = text(sourceStation1 + " and " + destStation1 + ": " + railTime1 + ' minutes.', width * 0.78, height/2.55);
-	
-	
+		// Information and text for average wait times using the station to station API
+		textSize(20)
+		if (allTime.length != 0) {
+			for (let i = 0; i < allTime.length; i++) {
+				// pieArray[i].display(text('Average ride time between ' + sourceStation[i] + " and " + destStation[i], width * 0.78, height/2.75))
+				pieArray[i].display(allTime, i, text('Average ride time between ' + sourceStation[i] + " and " + destStation[i], width * 0.78, height/2.75))
+			}
+		}
+
+		// let stationInfo_txt = text('Average ride time between ', width * 0.78, height/2.75);
+		// let railTime_txt = text(sourceStation1 + " and " + destStation1 + ": " + railTime1 + ' minutes.', width * 0.78, height/2.55);
+
 }
