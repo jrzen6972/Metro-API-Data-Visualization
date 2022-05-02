@@ -4,7 +4,6 @@ boxArray = []
 
 loggedDates = []
 
-
 avgCounter = 0; avgArray = []
 
 function createVis2Elements(){

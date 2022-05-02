@@ -29,7 +29,7 @@ function updateUrl() {
 	url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + locCode + '?api_key=' + apiKey
 
 	// locCode2 = locationDict.get(selTime.value())
-	urlTime = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo' + locCode + '&api_key=' + apiKey
+	urlTime = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=' + locCode + '&api_key=' + apiKey
 }
 
 function askWMATA() {
@@ -47,10 +47,15 @@ function gotData(data) {
 
 function gotDataTime(data) {
 	allTime = data["StationToStationInfos"]
-	allTime.print()
+	sortTime(allTime)
 }
 
 function sortTrains(arr){
+	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1)
+	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1) || (a.Min < b.Min) ? 1:-1
+}
+
+function sortTime(arr) {
 	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1)
 	arr.sort((a, b) => (a.Group > b.Group) ? 1 : -1) || (a.Min < b.Min) ? 1:-1
 }

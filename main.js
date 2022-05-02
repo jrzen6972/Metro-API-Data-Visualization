@@ -3,7 +3,7 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
 
-urlTime = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
+urlTime = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=A01&api_key=' + apiKey
 
 function preload() {
 	me = getCurrentPosition()
@@ -94,6 +94,7 @@ function setup() {
 			pieArray[i] = new chartClass(xOrigin + xMulti * i, y) //upper level
 			pieArray[i + 3] = new chartClass(xOrigin + xMulti * i, y2) //lower level
 		}
+
 	} else { //desktop view
 		//scaling
 		xOrigin = (width / 40 + width * 0.055)
@@ -135,6 +136,11 @@ function draw() {
 		if (allTrains.length != 0) {
 			for (let i = 0; i < allTrains.length; i++) {
 				pieArray[i].display(allTrains, i) //show train dots(inputting train data)
+
+			}
+
+			for(let i = 0; i < allTime.length; i++) {
+				pieArray[i].display(allTime, i)
 			}
 		
 			for(let i = 0; i<allTrains.length;i++){
@@ -149,14 +155,15 @@ function draw() {
 		}
 		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
 	
-		// Information and text for average wait times using the station to station API
-		textSize(20)
-		if (allTime.length != 0) {
-			for (let i = 0; i < allTime.length; i++) {
-				// pieArray[i].display(text('Average ride time between ' + sourceStation[i] + " and " + destStation[i], width * 0.78, height/2.75))
-				pieArray[i].display(allTime, i, text('Average ride time between ' + sourceStation[i] + " and " + destStation[i], width * 0.78, height/2.75))
-			}
-		}
+		// Information and text for average wait times using the station to station API. Currently, the array is broken.
+		// textSize(20)
+		// if (allTime.length != 0) {
+		// 	for (let i = 0; i < allTime.length; i++) {
+		// 		// timeArray[i].display(text('Average ride time between ' + sourceStation[i] + " and " + destStation[i], width * 0.78, height/2.75))
+		// 		// pieArray[i].display(allTime, i, text('Average ride time between ' + sourceStation[i] + " and " + destStation[i], width * 0.78, height/2.75))
+		// 		pieArray[i].display(allTime, i)
+		// 	}
+		// }
 
 		// let stationInfo_txt = text('Average ride time between ', width * 0.78, height/2.75);
 		// let railTime_txt = text(sourceStation1 + " and " + destStation1 + ": " + railTime1 + ' minutes.', width * 0.78, height/2.55);
