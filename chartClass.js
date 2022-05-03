@@ -74,6 +74,12 @@ class chartClass {
 	textPopUp() {
 		if (this.hit) {
 			sel.hide()
+			selMonth.hide()
+			inpDay.hide()
+			inpSlider.hide()
+			searchButt.hide()
+			clearButt.hide()
+
 
 			fill(28, 170) ; rect(0, 0, width, height) //popup transparent rect
 

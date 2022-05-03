@@ -6,7 +6,7 @@ statToStatUrl = "https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo
 
 function preload() {
 	me = getCurrentPosition()
-	extDataTime = loadJSON('wmataAllTrains51.json')
+	extDataTime = loadJSON('wmataAllTrainsFinal.json')
 
 	stationData = loadJSON(stationUrl) //run 1 time request for stations
 	askWMATA() //get info for trains
@@ -83,7 +83,7 @@ function setup() {
 		}
 	} else { //desktop view
 		//scaling
-		xOrigin = (width / 40 + width * 0.055)
+		xOrigin = (width / 40 + width * 0.065)
 		xMulti = (width / 12 + width * 0.01)
 		y = height * .3
 
@@ -148,7 +148,7 @@ function draw() {
 	text("Riding Rates by Selection",width*.8,height*.5-35)
 
 	fill(255)
-	text(nM(inpSlider.value() % 12) + amPM(inpSlider.value()), inpSlider.x + 100, inpSlider.y + 15)
+	text(nM(inpSlider.value() % 12) + amPM(inpSlider.value()), inpSlider.x + 77, inpSlider.y + 15)
 
 	if(max){
 		textSize(25)

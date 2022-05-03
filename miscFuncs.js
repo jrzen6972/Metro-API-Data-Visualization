@@ -1,5 +1,10 @@
 function mouseClicked() {
 	sel.show()
+	selMonth.show()
+	inpDay.show()
+	inpSlider.show()
+	searchButt.show()
+	clearButt.show()
 
 	for (j = 0; j < pieArray.length; j++) {
 		pieArray[j].clickedOn(mouseX, mouseY);

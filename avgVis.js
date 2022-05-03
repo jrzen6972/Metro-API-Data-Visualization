@@ -32,7 +32,7 @@ function createVis2Elements() {
 	inpSlider = createSlider(0, 23, 12, 1)
 	inpSlider.position(-25, height / 2 + 185)
 	inpSlider.style("transform", "rotate(-90deg)");
-	inpSlider.value(hour())
+	inpSlider.value(hour()-1)
 	// inpSlider.hide()
 
 	searchButt = createButton('Search')
