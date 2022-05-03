@@ -81,8 +81,6 @@ function mapDraw(){
 	}
     
 	scaleMapFuncs()
-
-	// text("WMATA Metro Stations by Coordinate Position\nColors of pie wheels correspond to lines available at the given station\nAlt-Click to Select a Station, regular click to select a second\nArrow keys to move points around\nPage-Up & Page-Down to 'zoom'", 50, 200)	
 }
 
 

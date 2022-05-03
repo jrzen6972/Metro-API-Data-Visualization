@@ -125,7 +125,7 @@ function draw() {
 	noStroke()
 	fill(255)
 	textSize(15)
-	text("Arrow keys to move, Page Up & Down to Zoom\nHold Spacebar and click anywhere to reset", width*.6+20, 400)
+	text("Arrow keys to move, Page Up & Down to Zoom\nHold Spacebar and click anywhere to reset\nHold 1-5 and click to make a selection", width*.6+20, 400)
 
 	textSize(width * 0.035)
 	text("WMATA API Live Data & Dashboard", 20, 100)
