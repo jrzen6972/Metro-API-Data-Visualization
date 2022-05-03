@@ -1,106 +1,73 @@
-apiKey = 'bce8f914a243405e80a73d82e0de2d2b'
-stationUrl = 'https://api.wmata.com/Rail.svc/json/jStationParking?api_key=' + apiKey
+apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
+url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
+stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
+stationParkingUrl = "https://api.wmata.com/Rail.svc/json/jStationParking?api_key=" + apiKey
 
-// let newFile = [];
-var button;
 
 function preload(){
 	stationData = loadJSON(stationUrl)
+	stationParking = loadJSON(stationParkingUrl)
 }
-function getStation(){
-	stationInfo = stationData['StationsParking']
-	Code1 = stationInfo[3].Code
-	TotalCount1 = stationInfo[3]['AllDayParking'].TotalCount
-	Code2 = stationInfo[4].Code
-	TotalCount2 = stationInfo[4]['AllDayParking'].TotalCount
-	riderCost1 = stationInfo[3]['AllDayParking'].RiderCost
-	riderCost2 = stationInfo[4]['AllDayParking'].RiderCost
-	nonriderCost1 = stationInfo[3]['AllDayParking'].NonRiderCost
-	nonriderCost2 = stationInfo[4]['AllDayParking'].NonRiderCost
-}
+function loadDrop(){
+    stations = stationData["Stations"]
+		stationCode = stationParking['StationsParking']
+		//Independent Dictionaries for each dropdownbox
+		locationDict1 = createStringDict("sample", "e")
+		locationDict1.remove("sample")
+		locationDict2 = createStringDict("sample", "e")
+		locationDict2.remove("sample")
+		
+		//dropdown 1
+		compareOne = createSelect("Station 1");
+		compareOne.style("background", "gray")
+		compareOne.style("font-family", "Arial")
+		compareOne.style("font-size", width / 46 + "px")
+		compareOne.style("text-align", "center")
+		compareOne.size(width * 0.55, height * 0.059)
+		compareOne.position(50,50)
+	
+		//dropdown 2
+		compareTwo = createSelect("Station 2");
+		compareTwo.style("background", "gray")
+		compareTwo.style("font-family", "Arial")
+		compareTwo.style("font-size", width / 46 + "px")
+		compareTwo.style("text-align", "center")
+		compareTwo.size(width * 0.55, height * 0.059)
+		compareTwo.position(50, 300)
+	
+		//populate dropdown boxes
+	// Built in dropbox station/code
+    stationNameCode = {"A07" : "Tenleytown-AU" , "A09": "Bethesda", "A11": "Grosvenor-Strathmore", "A12": "White Flint", "A13": "Twinbrook", "A14": "Rockville", "A15": "Shady Grove", "B04": "Rhode Island Ave-Brentwood", "B05": "Brookland-CUA", "B06": "Fort Totten", "B07": "Takoma", "B08": "Silver Spring", "B09": "Forest Glen", "B10": "Wheaton", "B11": "Glenmont", "C12": "Braddock Road", "C13": "King St-Old Town", "C15": "Huntington", "D09": "Minnesota Ave", "D10": "Deanwood", "D11": "Cheverly", "D12":"Landover", "D13": "New Carrollton",  "E06": "Fort Totten", "E07": "West Hyattsville", "E08": "Prince Georges Plaza", "E09": "College Park-U of Md", "E10": "Greenbelt", "F06": "Anacostia", "F07": "Congress Heights", "F08": "Southern Avenue", "F09": "Naylor Road", "F10": "Suitland", "F11": "Branch Ave", "G02": "Capital Heights", "G03": "Addison Road-Seat Pleasant", "G04":"Morgan Boulevard", "G05": "Largo Town Center", "J02": "Van Dorn Street", "J03": "Franconia-Springfield", "K05": "East Falls Church", "K06": "West Falls Church-VT/UVA", "K07": "Dunn Loring-Merrifield", "K08": "Vienna/Fairfax-GMU", "N06": "Wiehle-Reston East"}
 
+    for 
+}
+function displayStation() {
+	stationCode = stationParking['StationsParking']
+	stationInfo = []
+	//stationCount1 = n //holds total parking for dropbox1 selected
+	//stationCount2 = n //holds total parking for dropbox2 selected
+	//Station information dictionary, hosts station name/station code/ total parking count
+	for (i = 0; i < stationCode.length; i++){// loops for the length of array
+				stationInfo += ["'"+ stationCode[i].Code + "'"]
+		
+		//stationInfo = [stationCode[i]]
+		//print(stationCode.length - 1)
+		//print(stationCode[i])
+		//print(stationInfo)
+		
+	}
+	print(stationInfo)
+	print(locationDict2)
+	//const intersection = locationDict1.filter(element = stationCode.includes(element));
+	//print(stationCode)
+	//print(intersection)
+	//stationCode[i].Code
+	//stationCode[i]['AllDayParking'].TotalCount
+	//print(stations)
+	//print(locationDict)
+}
 function setup() {
-	// Button text, location, and action
-	button = createButton('Button here xd');
-	button.position(width/2, height/2);
-	button.mousePressed(openDEV);
-	
-	getStation()
-	//Graph display for Total spots available
-	const ctx1 = document.getElementById('chart1').getContext('2d');
-	const myChart = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-        labels: [Code1, Code2],
-        datasets: [{
-            label: 'All Day Parking Spaces available',
-            data: [TotalCount1,TotalCount2],
-            backgroundColor: [
-							//Color for the bar color 
-                'rgba(54, 162, 235, 0.2)',//blue,
-                'rgba(153, 102, 255, 0.2)'//purple, 
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
-                'rgba(153, 102, 255, 1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-	//Graph display of riders vs nonriders
-	const ctx2 = document.getElementById('chart2').getContext('2d');
-	const myChart2 = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: [Code1, Code2, Code1, Code2],
-        datasets: [{
-            label: 'Cost of Parking',
-            data: [riderCost1,riderCost2, nonriderCost1, nonriderCost2],
-            backgroundColor: [
-							//Color for the bar color 
-                'rgba(54, 162, 235, 0.2)',//blue (a12),
-                'rgba(153, 102, 255, 0.2)',//purple (a13), 
-								'rgba(54, 162, 235, 0.2)',//blue (a12),
-                'rgba(153, 102, 255, 0.2)'//purple (a13), 
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 0.2)',//blue (a12),
-                'rgba(153, 102, 255, 0.2)',//purple (a13), 
-								'rgba(54, 162, 235, 0.2)',//blue (a12),
-                'rgba(153, 102, 255, 0.2)'//purple (a13), 
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+	createCanvas(windowWidth, windowHeight);
+	loadDrop()
+	displayStation()
 }
-
-function openDEV() {
-	window.open('https://openprocessing.org/sketch/1539883/pc/abCR7UU0');
-}
-	
-//all day parking
-//static picture of what happends for orange line parking data.
-// riders cost vs non riders - bar chart (parking) / short term or long term
-// bar chart that the rectangles have a height of the total count station to station
-/*"AllDayParking": {
-      "TotalCount": 0,
-      "RiderCost": null,
-      "NonRiderCost": null,
-      "SaturdayRiderCost": null,
-      "SaturdayNonRiderCost": null */
