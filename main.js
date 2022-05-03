@@ -129,6 +129,9 @@ function draw() {
 
 	textSize(width * 0.035)
 	text("WMATA API Live Data & Dashboard", 20, 100)
+	textSize(32)
+	text("Live Train Data", width*.25, height*.15)
+
 
 	// timeElement() //display clock
 

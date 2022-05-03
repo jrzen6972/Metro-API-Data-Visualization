@@ -25,8 +25,9 @@ function mouseClicked() {
 					select2 = i
 				}else if(objs[i].HL1){
 					select1 = i
-					showRelative()
 				}
+				showRelative()
+
 			}
 	
 		selectedNames = [select1,select2,select3,select4,select5]
