@@ -6,7 +6,7 @@ function cacheData(){
 }
 
 function getHour(station,month,day,hour){ 
-    print(station + ",2022," + month + "," + day+ "-" +hour+",")
+    // print(station + ",2022," + month + "," + day+ "-" +hour+",")
     let tempArr = []
      for(let i = 0;i<60;i++){
          tempVal = getItem(station + ",2022," + month + "," + day+ "-" +hour+","+i)
@@ -15,6 +15,7 @@ function getHour(station,month,day,hour){
         }
          tempArr[i] = tempVal
      }
+    print(tempArr)
     return processData(tempArr)
  }
 

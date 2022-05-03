@@ -2,25 +2,25 @@ apiKey = 'dc0b3a0b8ee54077aa4e71f03e600aef'
 
 url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/A01?api_key=' + apiKey
 stationUrl = "https://api.wmata.com/Rail.svc/json/jStations?api_key=" + apiKey
-
-stationUrl_rm = 'https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?FromStationCode=a01&api_key=' + apiKey
+statToStatUrl = "https://api.wmata.com/Rail.svc/json/jSrcStationToDstStationInfo?&api_key=" + apiKey
 
 function preload() {
 	me = getCurrentPosition()
+	extDataTime = loadJSON('wmataAllTrains51.json')
+
 	stationData = loadJSON(stationUrl) //run 1 time request for stations
-	askWMATA()	//get info for trains
+	askWMATA() //get info for trains
+	askOtherWMATA() //relative info
 
 	//loads fonts
 	HNB = loadFont("fonts/HelveticaNeue Bold.ttf")
 	HNM = loadFont("fonts/HelveticaNeue Medium.ttf")
-
-	stationData_rm = loadJSON(stationUrl_rm) // Loads Station to Station api url
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	if(width<height){
+	if (width < height) {
 		mobile = true
 	}
 
@@ -28,8 +28,6 @@ function setup() {
 	locationDict.remove("sample")
 
 	stations = stationData["Stations"]
-	stations_rm = stationData_rm['StationToStationInfos']
-
 
 	//dropdown menu
 	sel = createSelect();
@@ -39,12 +37,14 @@ function setup() {
 	sel.center()
 	sel.style("text-align", "center")
 	sel.size(width * 0.55, height * 0.059)
-	if(mobile){
-		sel.position(width / 2 - sel.width / 2, height / 2 + (height/6) + sel.height * 2)
-	}else{
-		sel.position(width / 2 - sel.width / 2, height *.92)
+	if (mobile) {
+		sel.position(width / 2 - sel.width / 2, height / 2 + (height / 6) + sel.height * 2)
+	} else {
+		sel.position(width / 2 - sel.width / 2, height * .92)
 	}
 	sel.changed(updateUrl)
+
+	// print(relativeInfo)
 
 	//Populate Location Dictionary and Dropdown Box
 	for (let i = 0; i < stations.length; i++) {
@@ -56,25 +56,25 @@ function setup() {
 			sel.option(stations[i].Name)
 		}
 	}
-	userCoords = [me.latitude,me.longitude]
+	userCoords = [me.latitude, me.longitude]
 
 	onLaunch()
-		
+
 
 	textAlign(CENTER)
 	angleMode(DEGREES)
 	textFont(HNB)
 
 	setInterval(askWMATA, 1500) //request every 1.5 seconds
-	setInterval(cacheData,60000) //cache data every minute
+	setInterval(cacheData, 60000) //cache data every minute
 
-	if (mobile) {  //mobile view
+	if (mobile) { //mobile view
 		//scaling
 		xOrigin = (width / 5)
 		xMulti = (width / 4 + width * 0.04)
 		y = height / 3 - 45
 		y2 = height / 1.83
-	
+
 		//populate pieArray
 		for (let i = 0; i < 6 / 2; i++) {
 			pieArray[i] = new chartClass(xOrigin + xMulti * i, y) //upper level
@@ -83,62 +83,91 @@ function setup() {
 	} else { //desktop view
 		//scaling
 		xOrigin = (width / 40 + width * 0.055)
-		xMulti = (width / 12 + width * 0.04)
+		xMulti = (width / 12 + width * 0.01)
 		y = height * .3
-	
+
 		//populate pieArray
 		for (let i = 0; i < 6; i++) {
 			pieArray[i] = new chartClass(xOrigin + xMulti * i, y)
 		}
 	}
 
-	y = height/2+275
+	y = height / 2 + 275
 	for (let i = 0; i < 6; i++) {
 		boxArray[i] = new barObj(xOrigin + 100 + (250 * i), y)
 	}
 	//avgVis elements
-	createVis2Elements()	
-}
+	createVis2Elements()
+	mapSetup()
 
-function stationPaths() {
-	routeMap = 	stationData_rm['Path'];
-	
-	railTime1 = stationData_rm['StationToStationInfos'][0].RailTime
-	sourceStation1 = stationData_rm['StationToStationInfos'][0].SourceStation
-	destStation1 = stationData_rm['StationToStationInfos'][0].DestinationStation
+	setUpRelative()
+
+	print(objs[0].col[0])
+	print(objs[1].col[0])
 }
 
 function draw() {
-	stationPaths()
-	let middle = windowHeight/2
-
 	background(28)
-		textAlign(CENTER)
-		textSize(width * 0.05)
-		text("WMATA API Live Data & Dashboard",width/2,100)
 
-		timeElement() //display clock
-		if (allTrains.length != 0) {
-			for (let i = 0; i < allTrains.length; i++) {
-				pieArray[i].display(allTrains, i) //show train dots(inputting train data)
-			}
-		
-			for(let i = 0; i<allTrains.length;i++){
-				pieArray[i].textPopUp()	//ensure popups are above all dots
-			}
+	//load & show dotMap
+	mapDraw()
+	
+	//faux background
+	noFill()
+	stroke(28)
+	strokeWeight(40)
+	rect(1200, 0, width, 400)
+	strokeWeight(1)
+	fill(28)
+	rect(0, 0, 1200, height)
+	rect(1200,400,width,height)
+
+	noStroke()
+	fill(255)
+	textAlign(LEFT)
+	textSize(width * 0.035)
+	text("WMATA API Live Data & Dashboard", 25, 100)
+
+	//text stuff
+	textAlign(LEFT)
+	textSize(20)
+	fill("cyan")
+	text(`Selected Station 1: ${objs[select1].name}`, 1300, 400)
+	fill("gold")
+	text(`Selected Station 2: ${objs[select2].name}`, 1300, 425)
+	fill("pink")
+	text(`Selected Station 3: ${objs[select3].name}`, 1300, 450)
+	fill("brown")
+	text(`Selected Station 4: ${objs[select4].name}`, 1300, 475)
+	fill("lime")
+	text(`Selected Station 5: ${objs[select5].name}`, 1300, 500)
+	textSize(20)
+	fill(255)
+
+	//timeElement() //display clock
+
+
+	if (allTrains.length != 0) {
+		for (let i = 0; i < allTrains.length; i++) {
+			pieArray[i].display(allTrains, i) //show train dots(inputting train data)
 		}
-		textSize(32)
-		text("Average Train Wait Times", width*.33, height/2)
-		rectMode(CORNER)
-		for (let i = 0; i < boxArray.length; i++) {
-			boxArray[i].display(avgArray, i,loggedDates) //show train dots(inputting train data)
+
+		for (let i = 0; i < allTrains.length; i++) {
+			pieArray[i].textPopUp() //ensure popups are above all dots
 		}
-		text(nM(inpSlider.value()%12)+ amPM(inpSlider.value()),inpSlider.x+100,inpSlider.y+15)
-	
-	// Information and text for average wait times using the station to station API
-	textSize(20);
-	let stationInfo_txt = text('Average ride time between ', width * 0.78, height/2.75);
-	let railTime_txt = text(sourceStation1 + " and " + destStation1 + ": " + railTime1 + ' minutes.', width * 0.78, height/2.55);
-	
-	
+	}
+	textSize(32)
+	fill(255)
+	text("Average Train Wait Times", width * .33, height / 2)
+	rectMode(CORNER)
+	for (let i = 0; i < logStation.length; i++) {
+		boxArray[i].display(avgArray, i, loggedDates, logStation) //show train dots(inputting train data)
+	}
+
+
+	drawRelative()
+
+	textSize(15.75)
+
+	text(nM(inpSlider.value() % 12) + amPM(inpSlider.value()), inpSlider.x + 100, inpSlider.y + 15)
 }
