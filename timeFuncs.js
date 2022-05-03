@@ -18,8 +18,8 @@ function timeElement() {
 		textSize(width * 0.09)
 		text(amPM(hour()), width / 2, 0)
 	} else { //desktop scale
-		textSize(width * 0.06)
-		text(nM(currentTime[0]) + ":" + currentTime[1] + "\n"+ amPM(hour()),
+		textSize(width * 0.03)
+		text(nM(currentTime[0]) + ":" + currentTime[1] + amPM(hour()),
 			width *.9, height/2)
 	}
 }

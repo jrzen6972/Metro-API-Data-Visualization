@@ -10,21 +10,18 @@ stationsCoords = [] //array with latitude, longitude, and station names
 objs = [] //object array
 // selected1 = 0 //default values
 // selected2 = 1 //default values
-select1 = 0
-select2 = 1
-select3 = 2
-select4 = 3
-select5 = 4
+select1 = 94
+select2 = 14
+select3 = 38
+select4 = 85
+select5 = 75
 
-
+selectedNames = [select1,select2,select3,select4,select5]
 
 function mapSetup(){
 	locationDict2 = new p5.TypedDict()
-	// print(1712/width)
-	// print(227/height)
-		//mod = [width/2,height/2]
-		mod = [1725,450]
-	
+	mod = [width*.8463,height*.4536-230]
+		
 	//this forloop creates a dictionary of all stations and their lines
 	//api has a unique problem with two levels having the same "Name" value, a condition in here combines the data of each level
 	for (let i = 0; i < stations.length; i++) {
@@ -63,7 +60,7 @@ function mapSetup(){
 
 		for (let i = 0; i < stations.length; i++) {
 			stationsCoords[i] = [(stations[i].Lon + 77) * transVal + mod[0], (stations[i].Lat - 38) * (-1 * transVal) + height + mod[1] + 50, stations[i].Name]
-			objs[i] = new circ((stationsCoords[i][0]), (stationsCoords[i][1]), mod[0]-35,mod[1]-231, stationsCoords[i][2])
+			objs[i] = new circ((stationsCoords[i][0]), (stationsCoords[i][1]), mod[0]-35,mod[1] , stationsCoords[i][2],hexArr3)
 		}
 	}
 }

@@ -1,10 +1,11 @@
 class circ {
-	constructor(x, y, Xc, Yc, name) {
+	constructor(x, y, Xc, Yc, name,fillArr) {
 		angleMode(DEGREES)
 		this.X = x - Xc;
 		this.Y = y - Yc;
 		this.Xc = Xc;
 		this.Yc = Yc;
+		this.strokeArr = fillArr
 
 		this.ang = atan2(this.X, this.Y)
 		this.dist = dist(this.X + this.Xc, this.Y + this.Yc, this.Xc, this.Yc)
@@ -60,15 +61,15 @@ class circ {
 		let lastAngle = 0;
 		for (let i = 0; i < this.col[1].length; i++) {
 			if (this.HL1) {
-				stroke("cyan")
+				stroke(this.strokeArr[0])
 			} else if (this.HL2) {
-				stroke("gold")
+				stroke(this.strokeArr[1])
 			} else if (this.HL3){
-				stroke('pink')
+				stroke(this.strokeArr[2])
 			} else if (this.HL4){
-                stroke('brown')
+				stroke(this.strokeArr[3])
             } else if (this.HL5){
-                stroke('lime')
+				stroke(this.strokeArr[4])
             }else{
                 noStroke()
             }

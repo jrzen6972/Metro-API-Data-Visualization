@@ -10,10 +10,6 @@ avgCounter = 0;
 avgArray = []
 
 function createVis2Elements() {
-	// v2butt = createButton("Toggle Display")
-	// v2butt.position(width / 1.2, height / 1.2)
-	// v2butt.mousePressed(toggleState)
-
 	selMonth = createSelect();
 	selMonth.style("background", "white")
 	selMonth.style("font-family", "Arial")
@@ -49,20 +45,23 @@ function createVis2Elements() {
 	clearButt.mousePressed(clearSelection)
 	// clearButt.hide()
 }
-
+let max = false
 function updateNood() {
 	// avgArray[avgCounter] = getHour(sel.value(), monthDict[selMonth.value()], inpDay.value(), inpSlider.value())
-    // print([sel.value(),2022,(monthDict[selMonth.value()]-1),inpDay.value(),inpSlider.value()])
-    avgArray[avgCounter] = prepDayData(extDataTime,sel.value(),2022,(monthDict[selMonth.value()]-1),inpDay.value(),inpSlider.value())
-	logStation[avgCounter] = sel.value()
-	loggedDates[avgCounter] = [
-		"Month: " + selMonth.value() +
-		"\nDay: " + inpDay.value() +
-		"\nHour: " + nM(inpSlider.value() % 12) + amPM(inpSlider.value()) +
-		"\nStation: " + sel.value()
-	]
-	avgCounter++
-	//print([avgArray, loggedDates])
+	if(avgArray.length<5){
+		
+		avgArray[avgCounter] = prepDayData(extDataTime,sel.value(),2022,(monthDict[selMonth.value()]-1),inpDay.value(),inpSlider.value())
+		logStation[avgCounter] = sel.value()
+		loggedDates[avgCounter] = [
+			"Month: " + selMonth.value() +
+			"\nDay: " + inpDay.value() +
+			"\nHour: " + nM(inpSlider.value() % 12) + amPM(inpSlider.value()) +
+			"\nStation: " + sel.value()
+		]
+		avgCounter++
+	} else{
+		max = true
+	}
 }
 
 function clearSelection() {
@@ -70,5 +69,5 @@ function clearSelection() {
 	loggedDates = []
 	logStation = []
 	avgCounter = 0
-	//print(avgArray)
+	max = false
 }

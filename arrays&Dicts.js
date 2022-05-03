@@ -66,3 +66,12 @@ let monthDict = {
 	"November": 11,
 	"December": 12
 }
+
+let hexArr1 = [
+	"#003f5c","#58508d","#bc5090","#ff6361","#ffa600"
+]
+
+let hexArr2 = ["#ea5545", "#f46a9b", "#ef9b20", "#edbf33", "#ede15b", "#bdcf32", "#87bc45", "#27aeef", "#b33dc6"]
+// let hexArr3 = ["#020bb3","#7400b3","#ab00b1","#d800ac","#ff00a6"]
+let hexArr3 = ["#7462b3","#945cbc","#b84fbd","#dd3ab6","#ff00a6"]
+hexArr3=hexArr3.reverse()

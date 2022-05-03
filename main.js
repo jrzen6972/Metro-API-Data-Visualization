@@ -49,14 +49,15 @@ function setup() {
 	//Populate Location Dictionary and Dropdown Box
 	for (let i = 0; i < stations.length; i++) {
 		if (stations[i].Name == "Metro Center" || stations[i].Name == "Gallery Pl-Chinatown" || stations[i].Name == "L'Enfant Plaza" || stations[i].Name == "Fort Totten") {
-			locationDict.create(stations[i].Name + i, stations[i].Code)
-			sel.option(stations[i].Name + i)
+			//locationDict.create(stations[i].Name + i, stations[i].Code)
+			//sel.option(stations[i].Name + "Do not press")
 		} else {
 			locationDict.create(stations[i].Name, stations[i].Code)
 			sel.option(stations[i].Name)
 		}
 	}
 	userCoords = [me.latitude, me.longitude]
+	mapSetup()
 
 	onLaunch()
 
@@ -92,18 +93,14 @@ function setup() {
 		}
 	}
 
-	y = height / 2 + 275
-	for (let i = 0; i < 6; i++) {
+	y = height * .825
+	for (let i = 0; i < 5; i++) {
 		boxArray[i] = new barObj(xOrigin + 100 + (250 * i), y)
 	}
 	//avgVis elements
 	createVis2Elements()
-	mapSetup()
-
+	//stackedBar
 	setUpRelative()
-
-	print(objs[0].col[0])
-	print(objs[1].col[0])
 }
 
 function draw() {
@@ -116,36 +113,48 @@ function draw() {
 	noFill()
 	stroke(28)
 	strokeWeight(40)
-	rect(1200, 0, width, 400)
+	rect(width*.6, -20, width, 420)
 	strokeWeight(1)
 	fill(28)
-	rect(0, 0, 1200, height)
-	rect(1200,400,width,height)
-
+	rect(0, 0, width*.6, height)
+	rect(width*.6,400+20,width,height)
+	noFill()
+	stroke(255)
+	rect(width*.6+20, 0, width, 400-20)
+	textAlign(LEFT)
 	noStroke()
 	fill(255)
-	textAlign(LEFT)
-	textSize(width * 0.035)
-	text("WMATA API Live Data & Dashboard", 25, 100)
+	textSize(15)
+	text("Arrow keys to move, Page Up & Down to Zoom\nHold Spacebar and click anywhere to reset", width*.6+20, 400)
 
-	//text stuff
-	textAlign(LEFT)
-	textSize(20)
-	fill("cyan")
-	text(`Selected Station 1: ${objs[select1].name}`, 1300, 400)
-	fill("gold")
-	text(`Selected Station 2: ${objs[select2].name}`, 1300, 425)
-	fill("pink")
-	text(`Selected Station 3: ${objs[select3].name}`, 1300, 450)
-	fill("brown")
-	text(`Selected Station 4: ${objs[select4].name}`, 1300, 475)
-	fill("lime")
-	text(`Selected Station 5: ${objs[select5].name}`, 1300, 500)
+	textSize(width * 0.035)
+	text("WMATA API Live Data & Dashboard", 20, 100)
+
+	// timeElement() //display clock
+
+	textSize(32)
+	fill(255)
+	text("Average Train Wait Times", width * .33, height / 2)
+	rectMode(CORNER)
+	for (let i = 0; i < logStation.length; i++) {
+		boxArray[i].display(avgArray, i, loggedDates, logStation,hexArr1) //show train dots(inputting train data)
+	}
+	avgScale()
+
+
+	drawRelative()
 	textSize(20)
 	fill(255)
+	text("Riding Rates by Selection",width*.8,height*.5-35)
 
-	//timeElement() //display clock
+	fill(255)
+	text(nM(inpSlider.value() % 12) + amPM(inpSlider.value()), inpSlider.x + 100, inpSlider.y + 15)
 
+	if(max){
+		textSize(25)
+		fill("yellow")
+		text("Please clear the selection",width*.33,height*.55)
+	}
 
 	if (allTrains.length != 0) {
 		for (let i = 0; i < allTrains.length; i++) {
@@ -156,18 +165,4 @@ function draw() {
 			pieArray[i].textPopUp() //ensure popups are above all dots
 		}
 	}
-	textSize(32)
-	fill(255)
-	text("Average Train Wait Times", width * .33, height / 2)
-	rectMode(CORNER)
-	for (let i = 0; i < logStation.length; i++) {
-		boxArray[i].display(avgArray, i, loggedDates, logStation) //show train dots(inputting train data)
-	}
-
-
-	drawRelative()
-
-	textSize(15.75)
-
-	text(nM(inpSlider.value() % 12) + amPM(inpSlider.value()), inpSlider.x + 100, inpSlider.y + 15)
 }

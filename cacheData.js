@@ -15,7 +15,6 @@ function getHour(station,month,day,hour){
         }
          tempArr[i] = tempVal
      }
-    print(tempArr)
     return processData(tempArr)
  }
 
