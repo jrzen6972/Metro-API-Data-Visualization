@@ -20,13 +20,18 @@ class relObj {
             this.col = this.data[1]
             this.data = this.data[0]
             this.fares = [this.data.RailFare["PeakTime"],this.data.RailFare["OffPeakTime"],this.data.RailFare["SeniorDisabled"]]
+            this.fares.reverse()
             textSize(15)
 
             for(let i = 0; i<3;i++){
                 fill(this.colArr1[i])
-                 prevVal = this.fares[i] * 20
-                rect(this.X+lastChunk, this.Y,prevVal,this.wid/2,5,5,5,5)
-                lastChunk += prevVal + 3
+                //  prevVal = this.fares[i] * 20
+                // rect(this.X+lastChunk, this.Y,prevVal,this.wid/2,5,5,5,5)
+                // lastChunk += prevVal + 3
+
+                this.scaled = (this.fares[i] * (width / 40)) - lastChunk
+				rect(this.X + lastChunk, this.Y, this.scaled, this.wid / 2, 5, 5, 5, 5)
+				lastChunk += this.scaled + 2
             }
             noStroke(0)
 
@@ -65,6 +70,7 @@ function drawRelative(){
 function drawRelativeKey(fillArr){
     fills = fillArr
     textArr = ["Peak Time ","Off-Peak Time ","Senior/Disabled"]
+    textArr.reverse()
     fill(fills[0])
     text(textArr[0],width*.82,height*.93)
     fill(fills[1])
@@ -74,10 +80,17 @@ function drawRelativeKey(fillArr){
 
     fill(255)
     stroke(255)
-    line(width*.82, height*.85,width*.98,height*.85)
-    noStroke()
-    text("Fare Prices $", width*.875, height*.895)
-    for(let i = 0;i<6;i++){
-        text(i+4,width*.82+((width*.03)*i),height*.87)
-    }
+    // line(width*.82, height*.85,width*.98,height*.85)
+    // noStroke()
+    // text("Fare Prices $", width*.875, height*.895)
+    // for(let i = 0;i<6;i++){
+    //     text(i+4,width*.82+((width*.03)*i),height*.87)
+    // }
+
+    line(width * .82, height * .85, width * .98, height * .85)
+	noStroke()
+	text("Fare Prices $", width * .875, height * .89)
+	for (let i = 0; i < 7; i++) {
+		text(i, width * 0.82 + ((width / 40) * i), height * .873)
+	}
 }
